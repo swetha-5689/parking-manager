@@ -1,7 +1,7 @@
 If you haven't used github before:
 1. Set up github account and install git (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. Clone this repository using the green download button or by typing git clone https://github.com/swetha-5689/parking-manager into your terminal.
-2. Pull the changes
+2. Pull the changes by typing git pull.
 3. When you make a new file/edit a file, type git add [filename] in your terminal.
-4. Type git commit and add a commit message (for vim type :wq)
+4. Type git commit and add a commit message (for vim, ESC then type :wq)
 5. Push your changes by typing git push in your terminal.
