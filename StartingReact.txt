@@ -1,0 +1,6 @@
+1. Download node.js
+2. Install the create-react-app functionality using node.js.
+3. Download all dependencies that you need using npm install ______.
+So far we need react-bootstrap, react-router-dom, react-bootstrap-router.
+4. Use the create-react-app command and cd into the directory created.
+5. If you want to use/see what I have done so far, pull my code from SA-Branch into the src folder of your new react app.
