@@ -11,7 +11,7 @@ function Reservations() {
       <InputGroup className="mb-3">
         <InputGroup.Prepend>
           <InputGroup.Text id="inputGroup-sizing-default">
-            Default
+            Username
           </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
