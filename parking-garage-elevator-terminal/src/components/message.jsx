@@ -1,71 +1,129 @@
 import React, { Component } from "react";
-import SmartPark from "./SmartPark.png";
+import { devModeEnabled } from "./devMode";
 
 class message extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: "Welcome to SmartPark. Please approach the elevator terminal.",
-      status: 0
+      spinnerOn: 0,
+      canScan: 0,
+      scanColor: "red",
+      resFound: 0,
+      resColor: "red"
     };
   }
 
-  updateContent = () => {
+  updateMsg = () => {
     this.setState({
-      message: "Scanning license plate, do not press the button..."
+      message: "Scanning license plate...",
+      spinnerOn: 1
     });
-    let timer = setTimeout(() => {
-      this.setState({ message: "Reservation found. Thank you for parking." });
-    }, 5000);
-    timer = setTimeout(() => {
+
+    if (this.state.canScan != 1) {
+      setTimeout(() => {
+        this.setState({
+          message: "License plate could not be scanned.",
+          spinnerOn: 0
+        });
+      }, 5000);
+
+      setTimeout(() => {
+        this.setState({
+          message:
+            "Welcome to SmartPark. Please approach the elevator terminal.",
+          spinnerOn: 0
+        });
+      }, 12000);
+    } else {
+      setTimeout(() => {
+        if (this.state.resFound == 1) {
+          this.setState({
+            message: "Reservation found. Thank you for parking.",
+            spinnerOn: 0
+          });
+        } else {
+          this.setState({
+            message: "Reservation not found.",
+            spinnerOn: 0
+          });
+        }
+      }, 5000);
+      setTimeout(() => {
+        this.setState({
+          message:
+            "Welcome to SmartPark. Please approach the elevator terminal.",
+          spinnerOn: 0
+        });
+      }, 12000);
+    }
+  };
+
+  updateResButton = () => {
+    if (this.state.resFound == 0) {
       this.setState({
-        message: "Welcome to SmartPark. Please approach the elevator terminal."
+        resFound: 1,
+        resColor: "green"
       });
-    }, 12000);
+    } else if (this.state.resFound == 1) {
+      this.setState({
+        resFound: 0,
+        resColor: "red"
+      });
+    }
+  };
+
+  updateScanButton = () => {
+    if (this.state.canScan == 0) {
+      this.setState({
+        canScan: 1,
+        scanColor: "green"
+      });
+    } else if (this.state.canScan == 1) {
+      this.setState({
+        canScan: 0,
+        scanColor: "red"
+      });
+    }
   };
 
   render() {
     return (
       <div>
-        <div
-          className="d-inline-block"
-          style={{
-            height: 75,
-            width: "100%",
-            backgroundColor: "rgba(255,0,0,0.8)"
-          }}
-        >
-          <div
-            className="shadow p-3 mb-5 rounded"
-            style={{ height: 75, width: "100%" }}
-          >
-            <div
-              className="text-white text-left"
-              style={{ fontSize: 20, marginTop: 6 }}
-            >
-              SmartPark Technologies
-            </div>
-            <div
-              className="text-right"
-              style={{ width: "20%", height: "auto" }}
-            >
-              <img src={SmartPark} alt="SmartPark Logo" />
-            </div>
-          </div>
-        </div>
         <div className="h1 text-black text-center" style={{ marginTop: "20%" }}>
           {this.state.message}
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
+          <span>
+            {this.state.spinnerOn ? (
+              <div class="spinner-border m-2" role="status"></div>
+            ) : null}
+          </span>
         </div>
         <div className="text-center">
-          <button
-            className="btn btn-secondary m-5"
-            onClick={this.updateContent}
-          >
-            Click Me
-          </button>
+          {devModeEnabled ? (
+            <div>
+              <button
+                className="btn btn-secondary m-5"
+                onClick={this.updateMsg}
+              >
+                Start Elevator Sequence
+              </button>
+              <div>
+                <button
+                  class="m-3"
+                  onClick={this.updateScanButton}
+                  style={{ backgroundColor: this.state.scanColor }}
+                >
+                  License Plate can be Scanned?
+                </button>
+                <button
+                  onClick={this.updateResButton}
+                  style={{ backgroundColor: this.state.resColor }}
+                >
+                  Reservation Number Found?
+                </button>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     );
