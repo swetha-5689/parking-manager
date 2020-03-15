@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-let devModeEnabled = 0;
+let devModeEnabled = 1;
 class devMode extends Component {
   constructor(props) {
     super(props);

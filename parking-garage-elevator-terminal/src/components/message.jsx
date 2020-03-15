@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { devModeEnabled } from "./devMode";
+import DeviceCheck from "./connectedDevices";
 
 class message extends Component {
   constructor(props) {
@@ -90,11 +91,12 @@ class message extends Component {
   render() {
     return (
       <div>
+        <div>{this.props.allDevicesConnected}</div>
         <div className="h1 text-black text-center" style={{ marginTop: "20%" }}>
           {this.state.message}
           <span>
             {this.state.spinnerOn ? (
-              <div class="spinner-border m-2" role="status"></div>
+              <div className="spinner-border m-2" role="status"></div>
             ) : null}
           </span>
         </div>
