@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import Nav from "./Nav";
 import Home from "./Home";
 import Statistics from "./Statistics";
