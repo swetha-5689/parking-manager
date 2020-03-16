@@ -1,0 +1,31 @@
+setupNotes.txt
+
+mlab mongodb login cred:
+    clo64@scarletmail.rutgers.edu
+    102282Chuck
+
+Using Learn the MERN stack YouTube Video
+npm init //this command sets up the package.json file
+npm i express body-parser mongoose concurrently //this line installs express, mongoose for working with 
+                                                // mongoDB and concurrently for running client/server same time
+npm i -D nodemon
+
+we add scripts to the "scripts" section of package.json
+    "scripts": {
+    "start": "server.js",
+    "server": "nodemon server.js"
+This lets us update without having to constantly reload
+
+Add body-parser syntax to server.js
+
+Next, we create a mongoDB cluster for free at mLab
+
+The mongo URI
+mongodb+srv://chuck:<password>@mernshopping-dulm0.mongodb.net/test?retryWrites=true&w=majority
+
+Next setup the mongoDB schema, schemas map to Mongo DB and define the shape of the documents within collection
+
+Then we create a folder routes, and a subfolder api. Inside there a file items.js
+This serves as an api for to handle the get and put requests.
+
+POSTMAN for testing the puts and gets and deletes. Pretty kewl
