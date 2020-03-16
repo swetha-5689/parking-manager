@@ -1,0 +1,33 @@
+Folder called client
+
+cd into client, that's where we're going to build our react shit at
+
+    creat-react-app . to create in folder
+
+react is creating a package.json for the client side of things now
+
+IMPORTANT STEP: when building full stack, must build a proxy:
+
+    so we don't have to write full http: request out
+
+Want to be able to run back end and front end same time!
+
+    Use concurrently to run both at same time
+    To do this we want to add a few script commands to the server's package.json
+    "dev": "concurrently \"npm run server\" \"npm run client\"" //This will run both
+    In case we still want to run only client "front end"
+    "client": "npm start --prefix client" //This moves one folder up and runs client only
+
+Now we want to work on react app:
+
+Under client/src -> delete logo, clear the contents of App.css, delete index.css, 
+    index.js delte index.css reference, app.js get rid of logo reference, delete everything inside parent div
+
+We have some dependencies to build now:
+
+    Bootstrap: Go into the client folder!
+                npm i bootstrap reactstrap uuid react-transition-group
+    
+    Now go to app.js and imort bootstrap
+
+    IMPORTANT dependencies -> 
