@@ -4,7 +4,6 @@ import MessageComp from "./message";
 import message from "./message";
 
 let devicesConnected = 0;
-let loading = 1;
 
 class connectedDevices extends Component {
   constructor(props) {
@@ -26,12 +25,8 @@ class connectedDevices extends Component {
     ) {
       devicesConnected = 1;
     } else {
-      devicesConnected = 0;
+      devicesConnected = 1;
     }
-  };
-
-  load = () => {
-    loading = 1;
   };
 
   updateCameraStatus = () => {
