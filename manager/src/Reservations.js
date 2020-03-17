@@ -4,7 +4,14 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import { useAuth0 } from "./react-auth0-spa";
 function Reservations() {
+  const { loading } = useAuth0();
+
+  if (loading ) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
     <Container>

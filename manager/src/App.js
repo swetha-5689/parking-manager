@@ -1,28 +1,36 @@
 import React from "react"; 
-import Nav from "./Nav";
+import Nav from "./components/Nav";
 import Home from "./Home";
 import Statistics from "./Statistics";
 import Reservations from "./Reservations";
 import Overview from "./Overview";
+import Loading from "./components/Loading";
 import { MemoryRouter } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import PrivateRoute from "./components/PrivateRoute.js"
+import { useAuth0 } from "./react-auth0-spa";
 import "./App.css";
-
+import history from "./utils/history";
 function App() {
-  return (
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <Loading />;
+  }
+  else return (
     <MemoryRouter>
-      <Router>
-        <div className="App">
-          <Nav />
-          <Route path="/home" component={Home} />
-          <Route path="/statistics" component={Statistics} />
-          <Route path="/reservations" component={Reservations} />
-          <Route path="/overview" component={Overview} />
-        </div>
+      <Router history={history}>
+        <Nav />
+          <Switch>
+          <Route path="/" component={Home} />
+          <PrivateRoute path="/statistics" component={Statistics} />
+          <PrivateRoute path="/overview" component={Overview} />
+          <PrivateRoute path="/reservations" component={Reservations} />
+          </Switch>
       </Router>
     </MemoryRouter>
   );
+ 
 }
 
 export default App;
