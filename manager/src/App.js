@@ -22,10 +22,10 @@ function App() {
       <Router history={history}>
         <Nav />
           <Switch>
-          <Route path="/" component={Home} />
-          <PrivateRoute path="/statistics" component={Statistics} />
-          <PrivateRoute path="/overview" component={Overview} />
-          <PrivateRoute path="/reservations" component={Reservations} />
+            <Route exact path="/" component={Home} />
+            <PrivateRoute path="/statistics" component={Statistics} />
+            <PrivateRoute path="/overview" component={Overview} />
+            <PrivateRoute path="/reservations" component={Reservations} />
           </Switch>
       </Router>
     </MemoryRouter>
