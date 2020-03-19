@@ -38,6 +38,7 @@ const NavBar = () => {
                   Reservations
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/overview">Overview</NavDropdown.Item>
+                <NavDropdown.Item href="/editlayout">Edit Layout</NavDropdown.Item>
               </NavDropdown>
               <NavItem>
                 <Button onClick={() => logoutWithRedirect()}>Logout</Button>
