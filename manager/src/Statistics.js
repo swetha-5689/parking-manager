@@ -12,9 +12,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Pagination from "react-bootstrap/Pagination";
 import Graph from "./components/Graph";
+import { Alert } from "react-bootstrap";
 //import { BrowserRouter as Router, Route } from "react-router-dom";
-
-function Statistics() {
+function myClick() {
+  alert("hello");
+}
+function Statistics () {
   return (
     <div style={{ justifyContent: "center" }}>
       {/*Header*/}
@@ -29,7 +32,7 @@ function Statistics() {
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
               <Button variant="outline-secondary"
-              //onClick = 
+              onClick={myClick}
               >Daily</Button>
               <Button variant="outline-secondary">Weekly</Button>
               <Button variant="outline-secondary">Monthly</Button>
@@ -62,4 +65,5 @@ function Statistics() {
     </div>
   );
 }
+
 export default Statistics;
