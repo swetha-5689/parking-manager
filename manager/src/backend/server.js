@@ -7,7 +7,6 @@ const parkRoutes = express.Router();
 const PORT = 4000;
 
 
-
 app.use(cors());
 app.use(bodyParser.json());
 

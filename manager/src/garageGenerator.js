@@ -93,7 +93,7 @@ function GenerateGarage() {
   );
 }
 export default GenerateGarage;
-
+/*
 function creategarage() {
   var x = "";
   var i, j = 1;
@@ -111,6 +111,6 @@ function creategarage() {
   document.getElementById("demo").innerHTML = x;
 }
 
-
+*/
 
 

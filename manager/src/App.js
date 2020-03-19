@@ -8,7 +8,7 @@ import Loading from "./components/Loading";
 import { MemoryRouter } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute.js"
-import EditLayout from "./EditLayout"
+import garageGenerator from "./garageGenerator"
 import Pricing from "./Pricing"
 import { useAuth0 } from "./react-auth0-spa";
 import "./App.css";
@@ -29,7 +29,7 @@ function App() {
             <PrivateRoute path="/overview" component={Overview} />
             <PrivateRoute path="/reservations" component={Reservations} />
             <PrivateRoute path="/pricing" component={Pricing} />
-            <PrivateRoute path="/editlayout" component={EditLayout} />
+            <PrivateRoute path="/editlayout" component={garageGenerator} />
           </Switch>
       </Router>
     </MemoryRouter>
