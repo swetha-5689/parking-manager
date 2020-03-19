@@ -32,11 +32,13 @@ const NavBar = () => {
           {isAuthenticated && (
             <Nav className="mr-auto">
               <Nav.Link href="/statistics">Statistics</Nav.Link>
+              <Nav.Link href="/pricing">Pricing Menu</Nav.Link>
               <NavDropdown title="Garage View" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/reservations">
                   Reservations
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/overview">Overview</NavDropdown.Item>
+                <NavDropdown.Item href="/editlayout">Edit Layout</NavDropdown.Item>
               </NavDropdown>
               <NavItem>
                 <Button onClick={() => logoutWithRedirect()}>Logout</Button>

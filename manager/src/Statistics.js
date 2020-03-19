@@ -28,10 +28,13 @@ function Statistics() {
         <Form>
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
-              <Button variant="outline-secondary">Daily</Button>
+              <Button variant="outline-secondary"
+              //onClick = 
+              >Daily</Button>
               <Button variant="outline-secondary">Weekly</Button>
               <Button variant="outline-secondary">Monthly</Button>
             </InputGroup.Prepend>
+            {/*Dropdown menu*/}
             <DropdownButton
               as={InputGroup.Prepend}
               variant="outline-secondary"
