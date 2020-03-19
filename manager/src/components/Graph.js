@@ -16,7 +16,7 @@ class ChartsPage extends React.Component {
       datasets: [
         {
           label: "# of Customers",
-          data: [120, 190, 30, 50, 20, 30],
+          data: [120, 190, 30, 60, 20, 30],
           backgroundColor: [
             "rgba(255, 134,159,0.4)",
             "rgba(98,  182, 239,0.4)",
