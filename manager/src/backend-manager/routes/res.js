@@ -1,22 +1,37 @@
 //routes?
-const express = require('express');
-const res = express.Router();
-
-//Item Model
-const Res = require('../models/ResModel.js');
-
-// @route GET api/items
-// @desc Get All Items
-// @access Public
-
-res.get('/', (req, response) => {
-    Res.find({}, function(err, reservation) {
-        if (err) {
-          response.status(404).send(err);
-        } else {
-          response.json(reservation);
-        }
-      })
+const express = require("express");
+const router = express.Router();
+const mongoose = require('mongoose');
+const Res = require("../models/ResModel");
+var newReservation = Res({
+  custFName: "Jason",
+  custLName: "Mark",
+  type: "Guaranteed",
+  car: "E85GRN",
+  email: "jason@example.com",
+  username: "JasonMar",
+  resID: 34567875,
+  Paid: true
 });
 
-module.exports = res;
+router.post("/", (req, response) => {
+  newReservation
+    .save(function(error){
+        if(error) console.log();
+        else response.send(newReservation);
+    });
+});
+router.get("/", (req, response) => {
+  Res.find({}, function(err, reservation) {
+    if (err) {
+      response.status(404).send(err);
+    } else if (reservation.length == 0) {
+      response.send("sorry u still suck");
+      response.send(newReservation);
+    } else {
+      console.log("hello");
+      response.send(reservation);
+    }
+  });
+});
+module.exports = router;

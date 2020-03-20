@@ -19,12 +19,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', reserveRouter);
-const mongoURI = 'mongodb+srv://swetha5689:SmartPark2020@smartpark-necgp.mongodb.net/test?retryWrites=true&w=majority';
+const mongoURI = 'mongodb+srv://swetha5689:SmartPark2020@smartpark-necgp.mongodb.net/SmartPark?retryWrites=true&w=majority';
 mongoose
     .connect(mongoURI, {useNewUrlParser: true})
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
-
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function() {
+      // we're connected!
+    });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -13,6 +13,7 @@ var ReservationSchema = new Schema({
     },
     type: {
         type: String,
+        enum: ["Walk-in", "Guaranteed", "Confirmed"],
         required: true
     },
     car: {
@@ -47,6 +48,8 @@ var ReservationSchema = new Schema({
         type: Number,
         required: true
     }
-});
-ReservationSchema.set('collection', 'Reservations');
-module.exports = mongoose.model('Reservations', ReservationSchema);
+},
+{collection : 'Reservations'}
+);
+const resModel = mongoose.model('Reservations', ReservationSchema);
+module.exports = resModel;
