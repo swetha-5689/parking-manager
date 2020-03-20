@@ -12,6 +12,7 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-generator": "^4.16.1",
     "mdbreact": "^4.25.4",
     "mongoose": "^5.9.5",
     "nodemon": "^2.0.2",
