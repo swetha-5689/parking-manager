@@ -1,0 +1,24 @@
+1. To start off, make sure you have nodemon installed on your computer. Nodemon helps run the server dynamically while you make changes to any source code. This basically replaces using "node" :)
+2. Make sure you cd into the "backend" directory
+3. Next, type "nodemon server" into the terminal and you should get this message back: "Server is runner on port: 6000"
+"MongoDB database connection established successfully"
+4. Open up MongoDB Compass or Atlas on your computer
+5. Type in this URI to connect to the database: mongodb+srv://brian2020:SmartPark2020@smartpark-necgp.mongodb.net/SmartPark?retryWrites=true&w=majority
+6. Now that we know that the database is connected and the server is up, its time to test making post and get requests!
+7. Make sure you have Postman or Insomnia downloaded on your computer. Those programs test REST api network connections
+8. Once you have either program open, find a place where it tells you to input a url and put this in: "http://localhost:6000/account
+9. Make sure you use this as a GET request and then click send
+10. You should see all the accounts created in the database! You'll also see an unique id associated with each of them
+11. Now let's try and input a new user in there. Change the url by adding /add at the end of account
+12. Input a new user by following this json format:
+{
+"username": "texthere",
+"email": "texthere",
+"firstname": "texthere",
+"lastname": "texthere",
+"password": "texthere",
+}
+13. After you type that, press send and you should get a message saying: "Account Created!"
+14. You can take a look at the models and routes to see other things you can input and receive from the database! 
+
+- Brian Ogbebor (3/27/2020) 

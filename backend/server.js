@@ -21,12 +21,14 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-const accountRouter = require("./routes/accountEdit");
+const accountRouter = require("./routes/accountFeatures");
 const billingRouter = require("./routes/billing");
+const loginRouter = require("./routes/login");
 
 app.use("/account", accountRouter);
 app.use("/billing", billingRouter);
+app.use("/login", loginRouter);
 
 app.listen(port, () => {
-  console.log("Server is running on port :" + port);
+  console.log("Server is running on port: " + port);
 });
