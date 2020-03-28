@@ -48,8 +48,9 @@ class Statistics extends React.Component {
 
                 {this.state.selectedOption == 1 && <DailyGraph></DailyGraph>}
                 {this.state.selectedOption == 2 && <WeeklyGraph></WeeklyGraph>}
-                {this.state.selectedOption == 3 && <YearlyGraph></YearlyGraph>}
-                {this.state.selectedOption == 4 && <Graph></Graph>}
+                {this.state.selectedOption == 3 && <Graph></Graph>}
+                {this.state.selectedOption == 4 && <YearlyGraph></YearlyGraph>}
+
                 <Container className="p-5">
                     <Form>
                         <InputGroup>
@@ -71,13 +72,13 @@ class Statistics extends React.Component {
                                         value={3}
                                         checked={this.state.selectedOption === 3}
                                     >
-                                        Yearly
+                                        Monthly
                   </ToggleButton>
                                     <ToggleButton
                                         value={4}
                                         checked={this.state.selectedOption === 4}
                                     >
-                                        Monthly
+                                        Yearly
                   </ToggleButton>
                                 </ToggleButtonGroup>
                             </div>
