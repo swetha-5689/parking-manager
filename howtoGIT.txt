@@ -1,0 +1,3 @@
+Let's say you are on the master branch! To switch to the CU-branch, type "git checkout CU-branch"! If you get an error message, send it to me :)
+
+After this command, you should now be on the CU-branch! 
