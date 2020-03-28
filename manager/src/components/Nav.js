@@ -11,7 +11,6 @@ import Preloader from "react-load-image";
 import NavItem from "react-bootstrap/NavItem";
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
   const logoutWithRedirect = () =>
     logout({
       returnTo: window.location.origin
@@ -30,6 +29,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {isAuthenticated && (
+            <>
             <Nav className="mr-auto">
               <Nav.Link href="/statistics">Statistics</Nav.Link>
               <Nav.Link href="/pricing">Pricing Menu</Nav.Link>
@@ -40,10 +40,13 @@ const NavBar = () => {
                 <NavDropdown.Item href="/overview">Overview</NavDropdown.Item>
                 <NavDropdown.Item href="/editlayout">Edit Layout</NavDropdown.Item>
               </NavDropdown>
-              <NavItem>
-                <Button onClick={() => logoutWithRedirect()}>Logout</Button>
-              </NavItem>
-            </Nav>
+              </Nav>
+              <Nav className = "ml-auto">
+                <NavItem >
+                  <Button onClick={() => logoutWithRedirect()}>Logout</Button>
+                </NavItem>
+              </Nav>
+              </>
           )}
           {!isAuthenticated && (
             <Nav className="ml-auto">
