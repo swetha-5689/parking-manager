@@ -68,7 +68,7 @@ class ChartsPage extends React.Component {
     render() {
         return (
             <MDBContainer>
-                <h3 className="mt-5">Year of 2021</h3>
+                <h3 className="mt-5">Year of 2020</h3>
                 <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
             </MDBContainer>
         );
