@@ -1,5 +1,4 @@
-import React from "react";
-import Table from "react-bootstrap/Table";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
@@ -7,56 +6,98 @@ import FormGroup from "react-bootstrap/FormGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import DropdownButton from "react-bootstrap/DropdownButton"; //need to reimplement dropdown for yearly
 import Dropdown from "react-bootstrap/Dropdown";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Pagination from "react-bootstrap/Pagination";
 import Graph from "./components/Graph";
-//import { BrowserRouter as Router, Route } from "react-router-dom";
+import DailyGraph from "./components/DailyGraph";
+import YearlyGraph from "./components/YearlyGraph";
+import WeeklyGraph from "./components/WeeklyGraph";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
 
-function Statistics() {
-  return (
-    <div style={{ justifyContent: "center" }}>
-      {/*Header*/}
-      <h1 style={{ justifyContent: "center", alignItems: "center" }}>
-        Parking Garage Statistics
-      </h1>
-      <Graph></Graph>
-
-      {/* Data Selection: OPTION 2*/}
-      <Container>
-        <Form>
-          <InputGroup className="mb-3">
-            <InputGroup.Prepend>
-              <Button variant="outline-secondary">Daily</Button>
-              <Button variant="outline-secondary">Weekly</Button>
-              <Button variant="outline-secondary">Monthly</Button>
-            </InputGroup.Prepend>
-            <DropdownButton
-              as={InputGroup.Prepend}
-              variant="outline-secondary"
-              title="By Year"
-              id="input-group-dropdown-1"
-            >
-              <Dropdown.Item href="#">2019</Dropdown.Item>
-              <Dropdown.Item href="#">2020</Dropdown.Item>
-              <Dropdown.Item href="#">2021</Dropdown.Item>
-              <Dropdown.Divider />
-            </DropdownButton>
-            <FormControl
-              type="text"
-              placeholder="Enter Data Range"
-              aria-label="Enter Data Range"
-              aria-describedby="basic-addon1"
-            />
-            <InputGroup.Append>
-              <Button variant="outline-secondary">Search</Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form>
-      </Container>
-      {/* End*/}
-    </div>
-  );
+var selectedOption;
+function Daily() {
+    return <DailyGraph></DailyGraph>;
 }
+function Weekly() {
+    return <WeeklyGraph></WeeklyGraph>;
+}
+function Yearly() {
+    return <YearlyGraph></YearlyGraph>;
+}
+function Monthly() {
+    return <Graph></Graph>;
+}
+
+class Statistics extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleToggle = this.handleToggle.bind(this);
+        this.state = { selectedOption: 1 };
+    }
+    handleToggle(event) {
+        this.setState({ selectedOption: event.target.value });
+    }
+
+    render() {
+        return (
+            <div>
+                {/*Header*/}
+                <h1 class="d-flex justify-content-center">Parking Garage Statistics</h1>
+
+                {this.state.selectedOption == 1 && <DailyGraph></DailyGraph>}
+                {this.state.selectedOption == 2 && <WeeklyGraph></WeeklyGraph>}
+                {this.state.selectedOption == 3 && <YearlyGraph></YearlyGraph>}
+                {this.state.selectedOption == 4 && <Graph></Graph>}
+                <Container className="p-5">
+                    <Form>
+                        <InputGroup>
+                            <div onChange={this.handleToggle}>
+                                <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+                                    <ToggleButton
+                                        value={1}
+                                        checked={this.state.selectedOption === 1}
+                                    >
+                                        Daily
+                  </ToggleButton>
+                                    <ToggleButton
+                                        value={2}
+                                        checked={this.state.selectedOption === 2}
+                                    >
+                                        Weekly
+                  </ToggleButton>
+                                    <ToggleButton
+                                        value={3}
+                                        checked={this.state.selectedOption === 3}
+                                    >
+                                        Yearly
+                  </ToggleButton>
+                                    <ToggleButton
+                                        value={4}
+                                        checked={this.state.selectedOption === 4}
+                                    >
+                                        Monthly
+                  </ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
+                            <FormControl
+                                type="text"
+                                placeholder="Enter Data Range"
+                                aria-label="Enter Data Range"
+                                aria-describedby="basic-addon1"
+                            />
+                            <InputGroup.Append>
+                                <Button variant="outline-secondary">Search</Button>
+                            </InputGroup.Append>
+                        </InputGroup>
+                    </Form>
+                </Container>
+
+                {/* End*/}
+            </div>
+        );
+    }
+}
+
 export default Statistics;
