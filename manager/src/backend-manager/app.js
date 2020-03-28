@@ -6,10 +6,10 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 var reserveRouter = require('./routes/res.js');
-
+var statsRouter = require('./routes/stats.js');
 var app = express();
 app.use(bodyParser.json());
-// view engine setup
+// view engine setups
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', reserveRouter);
+app.use('/api/res', reserveRouter);
+
 const mongoURI = 'mongodb+srv://swetha5689:SmartPark2020@smartpark-necgp.mongodb.net/SmartPark?retryWrites=true&w=majority';
 mongoose
     .connect(mongoURI, {useNewUrlParser: true})

@@ -28,7 +28,7 @@ function Reservations() {
         />
       </InputGroup>
     </Container>
-    <Container>
+    <Container className = "mb-4">
       <Table striped bordered hover>
         <thead>
           <tr>
