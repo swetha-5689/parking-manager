@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import Home from "./Home";
 import Statistics from "./Statistics";
 import Reservations from "./Reservations";
+import Calendar from "./Calendar";
 import Overview from "./Overview";
 import Loading from "./components/Loading";
 import { MemoryRouter } from "react-router-dom";
@@ -26,6 +27,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/home" component={Home} />
+                    <PrivateRoute path="/calendar" component={Calendar} />
                     <PrivateRoute path="/statistics" component={Statistics} />
                     <PrivateRoute path="/overview" component={Overview} />
                     <PrivateRoute path="/reservations" component={Reservations} />
