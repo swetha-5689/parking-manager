@@ -23,9 +23,11 @@ connection.once("open", () => {
 
 const accountRouter = require("./routes/accountFeatures");
 const billingRouter = require("./routes/billing");
+const reservationRouter = require("./routes/reservationRoute");
 
 app.use("/account", accountRouter);
 app.use("/billing", billingRouter);
+app.use("/reservation", reservationRouter);
 
 app.listen(port, () => {
   console.log("Server is running on port: " + port);

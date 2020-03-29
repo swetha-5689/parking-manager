@@ -30,7 +30,7 @@ router.route("/add").post((req, res) => {
 
 router.delete("/:id/", function(req, res) {
   Bill.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Bill payed!"))
+    .then(() => res.send("Bill payed!"))
     .catch(err => res.status(400).json("Error: " + err));
 });
 
