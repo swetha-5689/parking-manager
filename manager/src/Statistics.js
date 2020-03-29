@@ -74,13 +74,17 @@ class Statistics extends React.Component {
                                     >
                                         Monthly
                   </ToggleButton>
+
                                     <ToggleButton
                                         value={4}
                                         checked={this.state.selectedOption === 4}
+
                                     >
                                         Yearly
                   </ToggleButton>
+
                                 </ToggleButtonGroup>
+
                             </div>
                             <FormControl
                                 type="text"
