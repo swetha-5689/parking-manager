@@ -17,9 +17,9 @@ import CardDeck from 'react-bootstrap/CardGroup'
 function Home() {
     return (
         <>
-            <h1 class="d-flex justify-content-center pt-5">Welcome to SmarkPark!</h1>
+            <h1 class="d-flex justify-content-center pt-5" style={{ font: "Arial" }}>Welcome to SmarkPark!</h1>
             <p></p>
-            <h2 class="d-flex justify-content-center pb-5" style={{ color: 'red' }}>RU Ready to Park Smart?</h2>
+            <h2 class="d-flex justify-content-center pb-5" style={{ color: 'red', fontFamily: "Arial" }}>RU Ready to Park Smart?</h2>
             <div>
                 <Container>
                     <CardDeck>
