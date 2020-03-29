@@ -1,4 +1,6 @@
-//routes?
+/*Charles Owen
+* API for retrieving a price given two input times
+*/
 const express = require('express');
 const router = express.Router();
 

@@ -1,7 +1,10 @@
-//import React from 'react';
+/* Charles Owen
+* Page for Admin to view currently live price model
+* and make changes to the four most important factors
+* for the system.
+*/
 import React, { Component } from 'react';
 import axios from 'axios';
-//import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 import { Container, Row, Col } from 'reactstrap';
@@ -12,6 +15,7 @@ export default class ViewCurrent extends Component {
     constructor(){
     super();
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    //Establish essential sub variables of state.
     this.state = {
         base_rate: "Try refreshing",
         base_rate_mult: "Try refreshing",
@@ -74,6 +78,11 @@ export default class ViewCurrent extends Component {
         }
       }
     }
+    /*
+    * On button press, push new input values to the live price model
+    * database. Component will auto remount and refresh data with new
+    * calculations. 
+    */
     onFormSubmit(){
         console.log('Hi!!');
         let updateArray = {base_rate: this.state.new_base_rate, base_rate_mult: this.state.new_base_rate_mult,
@@ -84,6 +93,10 @@ export default class ViewCurrent extends Component {
         })
        // 
     }
+    /*
+    * Initial state of graph on mount. Sends request to get current
+    * model data from mongoDB
+    */
       componentDidMount(){
           axios.get('http://localhost:5000/api/liverevenue').then(livePriceModel => this.setState({
             base_rate: livePriceModel.data[0].base_rate,
@@ -215,7 +228,6 @@ export default class ViewCurrent extends Component {
             type = "text"
             name = "text"
             placeholder = "Base Rate" 
-            
             onChange = {e => this.setState({new_base_rate: e.target.value})}
             />
         </InputGroup>

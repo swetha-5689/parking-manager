@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
                     //Create a new PriceModel Class object, this is where we use all the 
                     //price model data retreived from mongoDb
                     let myModel = new PriceModelClass(model_name, base_rate, min_thresh, max_thresh, base_rate_mult, occupancy_precent, total_spots);
-                    //Calculate hourRates array required for the customer price function
+                    //Calculate hourlyRates array required for the customer price function
                     let hourlyRates = myModel.calculateHourlyRateArray();
                     let customerPrice = myModel.customerPrice(req.body.start, req.body.end, hourlyRates);
                     return customerPrice;

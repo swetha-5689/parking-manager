@@ -1,3 +1,7 @@
+/* Charles Owen
+* Database schema to store and manipulate the 
+* currently live price model.
+*/
 const mongoose = require('mongoose');
 const LivePriceSchema = mongoose.Schema;
 

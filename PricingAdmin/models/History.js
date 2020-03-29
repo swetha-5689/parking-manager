@@ -1,12 +1,13 @@
+
 /* Charles Owen
-* Database schema to store pricing schemes
-* for the admin to use for testing.
+* Database schema to store and manipulate 
+* historic price model and price performance data.
 */
 const mongoose = require('mongoose');
-const TestPriceSchema = mongoose.Schema;
+const HistorySchema = mongoose.Schema;
 
-//Create Schema
-const TestPriceModelSchema = new TestPriceSchema({
+//Our history schema
+const historySchema = new HistorySchema({
     model_name: {
         type: String,
         required: true,
@@ -35,9 +36,12 @@ const TestPriceModelSchema = new TestPriceSchema({
         type: Number,
         defailt: 0
     },
-    operation: {
-        type: String
+    actual_occupancy_percent: {
+        type: [String],
+    },
+    date: {
+        type: Date,
     }
 });
 
-module.exports = PriceModel = mongoose.model('test_price_model', TestPriceModelSchema)
+module.exports = hisSchema = mongoose.model('history', historySchema)

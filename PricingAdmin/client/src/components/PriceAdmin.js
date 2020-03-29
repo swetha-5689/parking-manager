@@ -20,7 +20,7 @@ export default class PriceAdmin extends Component {
           </Row>
           <Row>
                 <Col>
-                <Button href="/createNew" color="primary" size="lg" block>Create New Price Model</Button>                    
+                <Button href="/createNew" color="primary" size="lg" block>Edit weights</Button>                    
                 </Col>
           </Row>
           <Row>
@@ -28,9 +28,10 @@ export default class PriceAdmin extends Component {
           </Row>
           <Row>
                 <Col>
-                <Button href="/priceModelComparison" color="primary" size="lg" block>Compare Price Models</Button>                    
+                <Button href="/priceModelComparison" color="primary" size="lg" block>Compare Historic Model with Results</Button>                    
                 </Col>
           </Row>
+
 
         </Container>
         
