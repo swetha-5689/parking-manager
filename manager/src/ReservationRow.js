@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import {
-    withRouter
-  } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import { withRouter } from 'react-router-dom';
+
 class ReservationTableRow extends React.Component {
     constructor(props) {
         super(props);
         this.deleteRes = this.deleteRes.bind(this);
+        //this.onDelete = this.onDelete.bind(this);
+        
     }
     deleteRes() {
-        axios.all([
-        axios.delete('http://localhost:4000/api/res/' + this.props.obj._id),
-        axios.get('http://localhost:4000/api/res/')])
-        .then((responseArr) => {
-            this.setState({data: responseArr.data});
+        axios.delete('http://localhost:4000/api/res/' + this.props.obj._id)
+            .then((response) => {
+                this.setState({data: response.data});
+                
             }).catch((error) => {
                 console.log(error)
-        });
+            });
+        this.props.data();
     }
     render() {
         return (
