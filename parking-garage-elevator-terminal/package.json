@@ -8,10 +8,13 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
-    "react": "^16.12.0",
+    "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.4.0"
+    "react-dom": "^16.13.0",
+    "react-numpad": "^5.0.4",
+    "react-scripts": "3.4.0",
+    "reactstrap": "^8.4.1",
+    "uifx": "^2.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

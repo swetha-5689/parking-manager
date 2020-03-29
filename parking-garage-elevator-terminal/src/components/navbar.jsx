@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SmartPark from "./SmartPark.png";
 
+//File for the navbar of the SmartPark System
+
 class navbar extends Component {
   constructor(props) {
     super(props);
