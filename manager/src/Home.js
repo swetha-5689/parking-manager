@@ -56,7 +56,7 @@ function Home() {
                             <Card.Body>
                                 <Card.Title>Voice Assistance</Card.Title>
                                 <Card.Text>
-                                    Connect to Google Assistant with you smartphone or smart-speaker
+                                    Connect to Google Assistant with your smartphone or smart-speaker
                                     and make hands-free parking reservations .
       </Card.Text>
                                 <Card.Link href="https://assistant.google.com/">Google Assistant</Card.Link>
