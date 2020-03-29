@@ -27,12 +27,12 @@ function Home() {
                         <Card>
                             <Card.Img variant="top" src={logo} />
                             <Card.Body>
-                                <Card.Title>SmartPark Home</Card.Title>
+                                <Card.Title>SmartPark RU</Card.Title>
                                 <Card.Text>
                                     Hello, and welcome to SmartPark! RU Ready to Park Smart? Learn all about us
                                     and how we make parking, simplified.
       </Card.Text>
-                                <Card.Link href="/home">Home</Card.Link>
+                                <Card.Link href="https://smartparkru.wordpress.com/">Blog</Card.Link>
                             </Card.Body>
 
                         </Card>
