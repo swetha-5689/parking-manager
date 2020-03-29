@@ -11,12 +11,13 @@ class ChartsPage extends React.Component {
                 "No-Shows",
                 "RainChecks",
                 "Availabilities",
-                "Occupancies"
+                "Occupancies",
+                "Walk-ins"
             ],
             datasets: [
                 {
                     label: "# of Customers",
-                    data: [100000, 59000, 3000, 2000, 900, 3000],
+                    data: [2000, 15000, 500, 1000, 1500, 3000, 500],
                     backgroundColor: [
                         "rgba(255, 134,159,0.4)",
                         "rgba(98,  182, 239,0.4)",

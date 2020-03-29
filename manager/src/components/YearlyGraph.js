@@ -11,12 +11,13 @@ class ChartsPage extends React.Component {
                 "No-Shows",
                 "RainChecks",
                 "Availabilities",
-                "Occupancies"
+                "Occupancies",
+                "Walk-ins"
             ],
             datasets: [
                 {
                     label: "# of Customers",
-                    data: [100000, 59000, 3000, 2000, 900, 3000],
+                    data: [112030, 200000, 31010, 21060, 9047, 32000, 10150],
                     backgroundColor: [
                         "rgba(255, 134,159,0.4)",
                         "rgba(98,  182, 239,0.4)",
@@ -68,7 +69,7 @@ class ChartsPage extends React.Component {
     render() {
         return (
             <MDBContainer>
-                <h3 className="mt-5">Year of 2021</h3>
+                <h3 className="mt-5">Year of 2020</h3>
                 <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
             </MDBContainer>
         );
