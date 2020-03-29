@@ -8,8 +8,11 @@ const bodyParser = require('body-parser');
 var reserveRouter = require('./routes/res.js');
 var statsRouter = require('./routes/stats.js');
 var app = express();
-app.use(bodyParser.json());
+
+var cors = require('cors');
 // view engine setups
+app.use(cors());
+app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 

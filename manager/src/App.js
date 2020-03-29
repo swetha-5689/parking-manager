@@ -25,6 +25,7 @@ function App() {
         <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
             <PrivateRoute path="/statistics" component={Statistics} />
             <PrivateRoute path="/overview" component={Overview} />
             <PrivateRoute path="/reservations" component={Reservations} />

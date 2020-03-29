@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
@@ -7,10 +6,6 @@ import FormGroup from "react-bootstrap/FormGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Pagination from "react-bootstrap/Pagination";
 import Graph from "./components/Graph";
 import DailyGraph from "./components/DailyGraph";
 import YearlyGraph from "./components/YearlyGraph";
