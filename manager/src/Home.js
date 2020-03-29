@@ -42,8 +42,8 @@ function Home() {
                             <Card.Body>
                                 <Card.Title>Reservations</Card.Title>
                                 <Card.Text>
-                                    Manager override for creating, altering, and deleting customer reservations.
-                                    Query and Billing features coming soon.
+                                    Manager override for creating, altering, deleting, and searching for customer reservations.
+                                    Send billing alerts to customer emails.
       </Card.Text>
                                 <Card.Link href="/reservations">Reservations</Card.Link>
 
@@ -77,8 +77,7 @@ function Home() {
                             <Card.Body>
                                 <Card.Title>Parking Statistics</Card.Title>
                                 <Card.Text>
-                                    This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.
+                                    View the parking garage statistics for the day, month, week, or year.
       </Card.Text>
                                 <Card.Link href="/statistics">Statistics</Card.Link>
 
