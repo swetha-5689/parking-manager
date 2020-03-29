@@ -7,6 +7,7 @@ const billingSchema = new Schema({
   username: { type: String, required: true },
   currentDues: { type: Number, required: true },
   dateofDues: { type: Date, required: true },
+  description: { type: String, required: true },
   previousDues: { type: Number, required: false }
 });
 
