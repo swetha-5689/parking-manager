@@ -14,25 +14,25 @@ class App extends Component {
             events: [
                 {
                     id: 1,
-                    time: "10:00",
-                    title: "Breakfast with Simon",
-                    location: "Lounge Caffe",
-                    description: "Discuss Q3 targets"
+                    time: "10:00am",
+                    title: "Breakfast with Swetha",
+                    location: "Woody's",
+                    description: "Discuss Project Demo"
                 },
                 {
                     id: 2,
-                    time: "10:30",
-                    title: "Daily Standup Meeting (recurring)",
-                    location: "Warsaw Spire Office"
+                    time: "10:30am",
+                    title: "Find an Internship Workshop",
+                    location: "SERC 111"
                 },
-                { id: 3, time: "11:00", title: "Call with HRs" },
+                { id: 3, time: "11:00am", title: "Call with Jeff" },
                 {
                     id: 4,
-                    time: "12:00",
-                    title: "Lunch with Timmoty",
-                    location: "Canteen",
+                    time: "12:00pm",
+                    title: "Lunch with Nick",
+                    location: "Busch Dining Hall",
                     description:
-                        "Yum"
+                        "Better than Brower"
                 }
             ]
         };
