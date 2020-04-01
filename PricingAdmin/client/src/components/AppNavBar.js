@@ -1,3 +1,6 @@
+/*
+* General navigation bar
+*/
 import React from 'react';
 import { Fragment } from 'react';
 
@@ -42,11 +45,11 @@ export default class App extends React.Component {
               <NavLink href="/components/"></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <NavLink href="https://github.com/reactstrap/reactstrap">Fancy Pricing for Fancy People</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Click Here
+                Smart Park
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>

@@ -1,3 +1,6 @@
+/*
+* To be used at a later date.
+*/
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";

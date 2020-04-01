@@ -29,3 +29,24 @@ Then we create a folder routes, and a subfolder api. Inside there a file items.j
 This serves as an api for to handle the get and put requests.
 
 POSTMAN for testing the puts and gets and deletes. Pretty kewl
+
+Routes Explained
+
+/items is a test route, not used
+/liveprice  get: returns the all of the values associated with the active price model
+            post: updates the values of the active price model
+            There is no option to change the model's name, gets and posts operate on a hardcoded 
+            document entry
+/testprice  get: finds a price model by name, the idea was that admin could experiment with models
+                 and name them via the convention PM-1.. etc.
+            post: Accepts the fiels operation: "makenew" or operation: "update" to wither save
+                  a new price model by name or edit one by name
+/getprice   get: Get request must include two new fields in addition to the price model fields: 
+                 start: "00:00" and end: "00:00" -> These are used to compute a price for the time 
+                 a person is parked.
+            post: NO post option here
+/liverevenue get: This get request is used specifically for the admin panel View option.
+                  The JSON return includes the hourly revenue due to the dynamic variabels 
+                  in the live price model, the hourly revenue due to the base rate stored in the 
+                  live revenue model, the total dynamic revenue for the day and the rest of the
+                  variable values stored in the live model

@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
+
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
 import Col from "react-bootstrap/Col";

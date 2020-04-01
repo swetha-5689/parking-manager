@@ -1,5 +1,9 @@
+
+/* Charles Owen
+* The primary server page for the admin's pricing module.
+* Delcaration of all api routes and database schema.
+*/
 const express = require('express');
-//var cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const TestClass = require('./services/test.js');
@@ -8,9 +12,9 @@ const livepricemodel = require('./routes/api/priceapi.js');
 const testprice = require('./routes/api/testpriceapi.js')
 const getprice = require('./routes/api/getprice.js');
 const liverevenue = require('./routes/api/liverevenue');
+const historic = require('./routes/api/historic');
 //const PriceModelClass = require('./services/PriceModelClass.js');
 //const PriceModelSchema = require('./models/LivePriceModel');
-
 
 const app = express();
 
@@ -25,6 +29,24 @@ mongoose
     .connect(db)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
+/* API routes */
+app.use('/api/items', items);
+app.use('/api/liveprice', livepricemodel);
+app.use('/api/testprice', testprice);
+app.use('/api/getprice', getprice);
+app.use('/api/liverevenue', liverevenue);
+app.use('/api/historic', historic);
+
+/* Decl of server port */
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
+
+/* Old code used for testing purposes moved below this line.
+*  Don't delete in the event it is needed for reference.
+*  Remove before final release
+*/
 
 //Database Test
 //var LivePriceTest = mongoose.model('Live', PriceModelSchema);
@@ -47,11 +69,7 @@ let occupancyPercent = [
 // User Routes
 //app.options('*', cors());
 //app.use(cors);
-app.use('/api/items', items);
-app.use('/api/liveprice', livepricemodel);
-app.use('/api/testprice', testprice);
-app.use('/api/getprice', getprice);
-app.use('/api/liverevenue', liverevenue);
+
 //app.get('/hey', function(req, res) {
    //res.send(newPriceModel.calculateHourlyRateArray());
    //res.send(newPriceModel.customerPrice('00:00', '01:00', dailyRate));
@@ -70,8 +88,3 @@ app.post('/hey', function(req, res){
 
 
 //console.log(newPriceModel.calculatePriceArray());
-
-
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));

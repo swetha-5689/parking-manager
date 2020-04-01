@@ -1,3 +1,6 @@
+/* Charles Owen
+* API for caculating daily revenue, projected dynamic and base.
+*/
 const express = require('express');
 const router = express.Router();
 const PriceModelClass = require('../../services/PriceModelClass.js');
@@ -8,7 +11,7 @@ const LivePriceModel = require('../../models/LivePriceModel');
 //@route Get api/liverevenue
 //@desc Generates a first array containing the hourly
 //      revenue based on the dynamic price
-//      Denerates a second array containing the hourly
+//      Generates a second array containing the hourly
 //      revenue based on the static price
 //      Send both arrays to the caller in JSON format
 //      "live_revenue" : "arr"
@@ -33,14 +36,14 @@ router.get('/', (req, res) => {
                     //Calculate hourlRates array required for the customer price function
                     let hourlyRates = myModel.calculateHourlyRateArray();
                     //Calculate the daily revenue with dynamic rates
-                    let revenueArray = myModel.calculateDailyRevenue(hourlyRates);
+                    let revenueArray = myModel.calculateDailyRevenue(hourlyRates, occupancy_precent);
                     //Get the total projected revenue
                     let totalProjRevenue = myModel.calculateTotalDailyRevenue(revenueArray);
                     console.log(totalProjRevenue);
                     //Get the hourly rates based on the current base_rate       
                     let hourlyRatesStatic = myModel.calculateHourlyRateArrayStatic();
                     //Calculate the daily revenue with dynamic rates
-                    let revenueArrayStatic = myModel.calculateDailyRevenue(hourlyRatesStatic);
+                    let revenueArrayStatic = myModel.calculateDailyRevenue(hourlyRatesStatic, occupancy_precent);
                     //Place both arrays in a JSON friendly object
                     console.log('ping');
                     let returnAllData = {live_revenue: revenueArray, 
