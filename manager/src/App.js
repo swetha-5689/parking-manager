@@ -14,6 +14,7 @@ import Pricing from "./Pricing"
 import { useAuth0 } from "./react-auth0-spa";
 import "./App.css";
 import history from "./utils/history";
+import EditLayout from "./EditLayout";
 function App() {
     const { loading } = useAuth0();
 
@@ -32,7 +33,7 @@ function App() {
                     <PrivateRoute path="/overview" component={Overview} />
                     <PrivateRoute path="/reservations" component={Reservations} />
                     <PrivateRoute path="/pricing" component={Pricing} />
-                    <PrivateRoute path="/editlayout" component={garageGenerator} />
+                    <PrivateRoute path="/editlayout" component={EditLayout} />
                 </Switch>
             </Router>
         </MemoryRouter>

@@ -47,8 +47,9 @@ router.post("/", (req, response) => {
   newReservation2
     .save(function(error){
         if(error) console.log();
-        else response.send(newReservation);
+        else response.send(newReservation2);
     });
+    response.end();
 });
 router.get("/", (req, response) => {
   Res.find({}, function(err, reservation) {
