@@ -4,17 +4,17 @@ const router = express.Router();
 var cors = require('cors');
 const Res = require("../models/ResModel");
 var newReservation = Res({
-  custFName: "Swetha",
-  custLName: "Angara",
+  custFName: "Aniqa",
+  custLName: "Rahim",
   type: "Confirmed",
-  car: "E85QNY",
-  email: "swetha@example.com",
-  username: "s_angara",
-  resID: 129247,
+  car: "E43RET",
+  email: "aniqa@example.com",
+  username: "a_rahim",
+  resID: 129229,
   Paid: true,
-  startTime: "March 27, 2020 8:00 AM EST",
-  endTime: "March 27, 2020 12:00 PM EST",
-  reserveTime: "March 27, 2020 12:00 PM EST"
+  startTime: Date("March 31, 2020 9:00 AM EST"),
+  endTime: Date("March 31, 2020 12:00 PM EST"),
+  reserveTime: Date("March 31, 2020 12:00 PM EST")
 });
 var newReservation2 = Res({
   custFName: "Jeffrey",
@@ -25,9 +25,9 @@ var newReservation2 = Res({
   username: "j_samson",
   resID: 129242,
   Paid: false,
-  startTime: "March 28, 2020 9:00 AM EST",
-  endTime: "March 28, 2020 12:00 PM EST",
-  reserveTime: "March 28, 2020 12:00 PM EST"
+  startTime: Date("March 28, 2020 9:00 AM EST"),
+  endTime: Date("March 28, 2020 12:00 PM EST"),
+  reserveTime: Date("March 28, 2020 12:00 PM EST")
 });
 var newReservation3 = Res({
   custFName: "Neha",
@@ -38,13 +38,13 @@ var newReservation3 = Res({
   username: "n_nelson",
   resID: 129652,
   Paid: false,
-  startTime: "March 18, 2020 9:00 AM EST",
-  endTime: "March 18, 2020 12:00 PM EST",
-  reserveTime: "March 18, 2020 12:00 PM EST"
+  startTime: Date("March 18, 2020 9:00 AM EST"),
+  endTime: Date("March 18, 2020 12:00 PM EST"),
+  reserveTime: Date("March 18, 2020 12:00 PM EST")
 });
 router.use(cors());
 router.post("/", (req, response) => {
-  newReservation3
+  newReservation2
     .save(function(error){
         if(error) console.log();
         else response.send(newReservation);
