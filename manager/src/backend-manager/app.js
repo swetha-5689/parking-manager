@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 var reserveRouter = require('./routes/res.js');
 var statsRouter = require('./routes/stats.js');
+var floorRouter = require('./routes/floors.js');
+var spotsRouter = require('./routes/spots.js');
 var app = express();
 
 var cors = require('cors');
@@ -22,7 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/res', reserveRouter);
-
+app.use('/api/floors', floorRouter);
+app.use('/api/spots', spotsRouter);
+app.use('/api/stats', statsRouter);
 const mongoURI = 'mongodb+srv://swetha5689:SmartPark2020@smartpark-necgp.mongodb.net/SmartPark?retryWrites=true&w=majority';
 mongoose
     .connect(mongoURI, {useNewUrlParser: true})

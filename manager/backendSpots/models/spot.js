@@ -27,6 +27,8 @@ const SpotSchema = new Schema({
     type: Boolean,
     required: true
   }
-});
+},
+  {collection : 'Spots'}
+);
 
-module.exports = Spot = mongoose.model("spot", SpotSchema);
+module.exports = Spot = mongoose.model("Spots", SpotSchema);

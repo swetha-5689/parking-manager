@@ -13,6 +13,7 @@ class Reservations extends React.Component {
     this.state = {
       data: []
     };
+    this.changeData = this.changeData.bind(this);
   }
   componentDidMount() {
     axios.get('http://localhost:4000/api/res/')
@@ -34,7 +35,7 @@ class Reservations extends React.Component {
   }
   resTable() {
     return this.state.data.map((response, i) => {
-      return <ReservationTableRow obj={response} key={i} data = {this.changeData.bind(this)}/>;
+      return <ReservationTableRow obj={response} key={i} data = {this.changeData}/>;
     });
   }
   render() {
@@ -70,7 +71,7 @@ class Reservations extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.data === [] && <p>no data to show</p>}
+              {this.state.data == [] && <p>no data to show</p>}
             {this.state.data != [] && this.resTable()}             
             </tbody>
           </Table>

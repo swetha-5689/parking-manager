@@ -1,4 +1,4 @@
 module.exports = {
   atlasURI:
-    "mongodb+srv://Tom:tom123@parkingspots0-awamx.gcp.mongodb.net/test?retryWrites=true&w=majority"
+  'mongodb+srv://swetha5689:SmartPark2020@smartpark-necgp.mongodb.net/SmartPark?retryWrites=true&w=majority'
 };

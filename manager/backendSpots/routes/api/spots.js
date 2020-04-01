@@ -4,6 +4,10 @@ const router = express.Router();
 
 const Spot = require("../../models/Spot");
 
+var cors = require("cors");
+
+router.use(cors());
+
 router.get("/", (req, res) => {
   Spot.find()
     .then(spots => res.json(spots))
@@ -12,8 +16,8 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const newSpot = new Spot({
-    spotNumber: req.body.spotNumber,
-    floorNumber: req.body.floorNumber,
+    spotNumber: Number(req.body.spotNumber),
+    floorNumber: Number(req.body.floorNumber),
     isVacant: Boolean(req.body.isVacant),
     isReserved: Boolean(req.body.isReserved),
     isHandicapped: Boolean(req.body.isHandicapped),
@@ -23,6 +27,18 @@ router.post("/", (req, res) => {
   newSpot
     .save()
     .then(spots => res.json(spots).catch(err => res.status(400).json(err)));
+});
+
+router.get("/:spotNumber", (req, res) => {
+  Spot.findOne({ spotNumber: req.params.spotNumber })
+    .then(spots => res.json(spots))
+    .catch(err => res.status(400).json(err));
+});
+
+router.get("/open/:isVacant", (req, res) => {
+  Spot.find({ isVacant: req.params.isVacant })
+    .then(spots => res.json(spots))
+    .catch(err => res.status(400).json(err));
 });
 
 router.delete("/:id", (req, res) => {
