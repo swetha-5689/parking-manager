@@ -32,9 +32,9 @@ class ParkingSpot extends React.Component {
         <>
         {!this.state.data[i].isVacant &&
         <OverlayTrigger obj = {response} key = {i}
-          placement='top'
+          placement='center'
           overlay={
-            <Tooltip id={`tooltip-top`}>
+            <Tooltip>
               Floor Number: {this.state.data[i].floorNumber}<br></br>
               Vacancy Status: {this.state.data[i].isVacant.toString()}<br></br>
               Reserved: {this.state.data[i].isReserved.toString()}<br></br>
@@ -52,7 +52,7 @@ class ParkingSpot extends React.Component {
         <OverlayTrigger obj = {response} key = {i}
           placement='top'
           overlay={
-            <Tooltip id={`tooltip-top`}>
+            <Tooltip>
               Floor Number: {this.state.data[i].floorNumber}<br></br>
               Vacancy Status: {this.state.data[i].isVacant.toString()}<br></br>
               Reserved: {this.state.data[i].isReserved.toString()}<br></br>
@@ -70,7 +70,7 @@ class ParkingSpot extends React.Component {
         <OverlayTrigger obj = {response} key = {i}
           placement='top'
           overlay={
-            <Tooltip id={`tooltip-top`}>
+            <Tooltip>
               Floor Number: {this.state.data[i].floorNumber}<br></br>
               Vacancy Status: {this.state.data[i].isVacant.toString()}<br></br>
               Reserved: {this.state.data[i].isReserved.toString()}<br></br>
