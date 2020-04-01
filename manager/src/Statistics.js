@@ -43,7 +43,7 @@ class Statistics extends React.Component {
         return (
             <div>
                 {/*Header*/}
-                <h1 class="d-flex justify-content-center">Parking Garage Statistics</h1>
+                <h1 className="d-flex justify-content-center">Parking Garage Statistics</h1>
 
                 {this.state.selectedOption == 1 && <DailyGraph></DailyGraph>}
                 {this.state.selectedOption == 2 && <WeeklyGraph></WeeklyGraph>}
