@@ -113,7 +113,6 @@ function Home() {
       </div>
     </>
   );
-=======
     return (
         <>
             <h1 class="d-flex justify-content-center pt-5" style={{ font: "Arial" }}>Welcome to SmarkPark!</h1>
