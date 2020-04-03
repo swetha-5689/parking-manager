@@ -5,10 +5,6 @@ import Container from "react-bootstrap/Container";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 
 class EditLayout extends React.Component {
   constructor(props) {
