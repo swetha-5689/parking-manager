@@ -54,5 +54,3 @@ manager/backendSpots/routes/spot.js
 
 manager/backendSpots/Server.js
 	This file is what connects us to our mongo DB database and uses both express and mongoose to do that.
-	
-Files I need a description for: App.css, EditLayout.js, Overview.js, Pricing.js, ReservationRow.js, serviceWorker.js, 
