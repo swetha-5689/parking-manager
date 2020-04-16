@@ -16,18 +16,6 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
 var selectedOption;
-function Daily() {
-  return <DailyGraph></DailyGraph>;
-}
-function Weekly() {
-  return <WeeklyGraph></WeeklyGraph>;
-}
-function Yearly() {
-  return <YearlyGraph></YearlyGraph>;
-}
-function Monthly() {
-  return <Graph></Graph>;
-}
 
 class Statistics extends React.Component {
   constructor(props) {
@@ -98,10 +86,33 @@ class Statistics extends React.Component {
           </Form>
         </Container>
 
-        {/* End*/}
-      </div>
-    );
-  }
+                                </ToggleButtonGroup>
+
+
+                                <span>
+                                    <FormControl
+                                        type="date"
+                                        style={{ height: "5" }}
+                                        placeholder="Enter Data Range"
+                                        aria-label="Enter Data Range"
+                                        aria-describedby="basic-addon1"
+                                    />
+
+                                </span>
+                                <Button variant="outline-secondary">Search</Button>
+
+                            </div>
+
+                        </InputGroup>
+
+                    </Form>
+
+                </Container>
+
+                {/* End*/}
+            </div>
+        );
+    }
 }
 
 export default Statistics;

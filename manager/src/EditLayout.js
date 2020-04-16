@@ -43,26 +43,26 @@ class EditLayout extends React.Component {
     });
   }
 
-  getFloors() {
-    return this.state.floors.map((response, i) => {
-      return (
-        <>
-        <tr>
-        <th obj = {response}>Floor {this.state.floors[i].number}</th>
-        </tr>
-        <Col><ParkingSpot key = {i} floorNumber = {this.state.floors[i].number} /> </Col>
-        </>
-      );
-    });
-  }
-  render () {
-    return (
-        <Container className="mb-4">
-           <Table style={{ height: 1, }} class="align-baseline">
-              {this.getFloors()}           
-          </Table>
-        </Container>
-    );
-  }
+    getFloors() {
+        return this.state.floors.map((response, i) => {
+            return (
+                <>
+                    <tr>
+                        <th obj={response}>Floor {this.state.floors[i].number}</th>
+                    </tr>
+                    <Col><ParkingSpot key={i} floorNumber={this.state.floors[i].number} /> </Col>
+                </>
+            );
+        });
+    }
+    render() {
+        return (
+            <Container className="mb-4">
+                <Table style={{ height: 1, }} class="align-baseline">
+                    {this.getFloors()}
+                </Table>
+            </Container>
+        );
+    }
 }
 export default EditLayout;
