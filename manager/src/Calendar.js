@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import "./index.css";
-import { CarouselIndicators } from "reactstrap";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -14,25 +12,27 @@ class App extends Component {
             events: [
                 {
                     id: 1,
-                    time: "10:00",
-                    title: "Breakfast with Simon",
-                    location: "Lounge Caffe",
-                    description: "Discuss Q3 targets"
+                    time: "9:00am",
+                    title: "St. Patrick's Day Parade",
+                    location: "Highland Park",
+                    description: "Expect high demand for walk-ins, reservations, and a large number of overstays"
                 },
                 {
                     id: 2,
-                    time: "10:30",
-                    title: "Daily Standup Meeting (recurring)",
-                    location: "Warsaw Spire Office"
+                    time: "3:30pm",
+                    title: "TEDx",
+                    location: "RAC",
+                    description: "Expect students to walk-in to garage."
+
                 },
-                { id: 3, time: "11:00", title: "Call with HRs" },
+
                 {
-                    id: 4,
-                    time: "12:00",
-                    title: "Lunch with Timmoty",
-                    location: "Canteen",
+                    id: 3,
+                    time: "5:00pm",
+                    title: "Staff Meeting",
+                    location: "Room 202",
                     description:
-                        "Yum"
+                        "Staff Parking"
                 }
             ]
         };
@@ -118,7 +118,7 @@ class App extends Component {
                                 </MDBRow>
                             </h1>
                             <p>
-                                Don't forget your sunglasses. Today will dry and sunny, becoming
+                                Today will dry and sunny, becoming
                                 warm in the afternoon with temperatures of between 20 and 25
                                 degrees.
                 </p>

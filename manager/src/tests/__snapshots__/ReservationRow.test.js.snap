@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders everything correctly except for time 1`] = `
+<tr
+  data-testid="row"
+>
+  <td>
+    Neha
+  </td>
+  <td>
+    Nelson
+  </td>
+  <td>
+    n_nelson
+  </td>
+  <td>
+    Guaranteed
+  </td>
+  <td>
+    false
+  </td>
+  <td>
+    <time
+      dateTime={"2020-04-03T06:44:39.522Z"}
+    >
+      April 3rd 2020, 2:44:39
+    </time>
+     - 
+    <time
+      dateTime={"2020-04-03T06:44:39.522Z"}
+    >
+      April 3rd 2020, 2:44:39
+    </time>
+  </td>
+  <td>
+    <time
+      dateTime={"2020-04-03T06:44:39.523Z"}
+    >
+      April 3rd 2020, 2:44:39
+    </time>
+  </td>
+  <td>
+    129652
+  </td>
+  <td>
+    <button
+      className="btn btn-danger btn-sm"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+    <button
+      className="btn btn-primary btn-sm"
+      disabled={false}
+      type="button"
+    >
+      Bill
+    </button>
+  </td>
+</tr>
+`;

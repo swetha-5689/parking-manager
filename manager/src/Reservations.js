@@ -71,8 +71,8 @@ class Reservations extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.data == [] && <p>no data to show</p>}
-            {this.state.data != [] && this.resTable()}             
+              {this.state.data === [] && <td>no data to show</td>}
+            {this.state.data !== [] && this.resTable()}             
             </tbody>
           </Table>
         </Container>

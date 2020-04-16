@@ -25,16 +25,13 @@ var ReservationSchema = new Schema({
         required: true
     },
     startTime: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     endTime: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     reserveTime: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     username: {
         type: String,

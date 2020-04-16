@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div>
+  <div
+    className="container"
+  >
+    <div
+      className="mb-3 input-group"
+    >
+      <div
+        className="input-group-prepend"
+      >
+        <span
+          className="input-group-text"
+          id="inputGroup-sizing-default"
+        >
+          Username
+        </span>
+      </div>
+      <input
+        aria-describedby="inputGroup-sizing-default"
+        aria-label="Default"
+        className="form-control"
+        placeholder="Search"
+      />
+    </div>
+  </div>
+  <div
+    className="mb-4 container"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            First Name
+          </th>
+          <th>
+            Last Name
+          </th>
+          <th>
+            Username
+          </th>
+          <th>
+            Reservation Type
+          </th>
+          <th>
+            Paid Status
+          </th>
+          <th>
+            Stay Period
+          </th>
+          <th>
+            Reservation End Time
+          </th>
+          <th>
+            Confirmation Number
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+</div>
+`;
+
+exports[`renders correctly when there is one item 1`] = `
+<div>
+  <div
+    className="container"
+  >
+    <div
+      className="mb-3 input-group"
+    >
+      <div
+        className="input-group-prepend"
+      >
+        <span
+          className="input-group-text"
+          id="inputGroup-sizing-default"
+        >
+          Username
+        </span>
+      </div>
+      <input
+        aria-describedby="inputGroup-sizing-default"
+        aria-label="Default"
+        className="form-control"
+        placeholder="Search"
+      />
+    </div>
+  </div>
+  <div
+    className="mb-4 container"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            First Name
+          </th>
+          <th>
+            Last Name
+          </th>
+          <th>
+            Username
+          </th>
+          <th>
+            Reservation Type
+          </th>
+          <th>
+            Paid Status
+          </th>
+          <th>
+            Stay Period
+          </th>
+          <th>
+            Reservation End Time
+          </th>
+          <th>
+            Confirmation Number
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+</div>
+`;

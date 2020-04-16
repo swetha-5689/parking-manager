@@ -65,7 +65,7 @@ class ChartsPage extends React.Component {
             }
         }
     };
-
+    
     render() {
         return (
             <MDBContainer>

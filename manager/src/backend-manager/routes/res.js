@@ -1,8 +1,9 @@
-//routes?
 const express = require("express");
 const router = express.Router();
 var cors = require('cors');
 const Res = require("../models/ResModel");
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 var newReservation = Res({
   custFName: "Aniqa",
   custLName: "Rahim",
@@ -12,22 +13,22 @@ var newReservation = Res({
   username: "a_rahim",
   resID: 129229,
   Paid: true,
-  startTime: Date("March 31, 2020 9:00 AM EST"),
-  endTime: Date("March 31, 2020 12:00 PM EST"),
-  reserveTime: Date("March 31, 2020 12:00 PM EST")
+  startTime: new Date(2020, 2, 27, 9, 00),
+  endTime: new Date(2020, 2, 27, 12, 00),
+  reserveTime: new Date(2020, 2, 27, 12, 00)
 });
 var newReservation2 = Res({
   custFName: "Jeffrey",
   custLName: "Samson",
   type: "Confirmed",
   car: "E85DBY",
-  email: "jeffrey@example.com",
+  email: "jeffrey@sample.com",
   username: "j_samson",
   resID: 129242,
   Paid: false,
-  startTime: Date("March 28, 2020 9:00 AM EST"),
-  endTime: Date("March 28, 2020 12:00 PM EST"),
-  reserveTime: Date("March 28, 2020 12:00 PM EST")
+  startTime: new Date(2020, 2, 27, 9, 00),
+  endTime: new Date(2020, 2, 27, 12, 00),
+  reserveTime: new Date(2020, 2, 27, 12, 00)
 });
 var newReservation3 = Res({
   custFName: "Neha",
@@ -38,18 +39,31 @@ var newReservation3 = Res({
   username: "n_nelson",
   resID: 129652,
   Paid: false,
-  startTime: Date("March 18, 2020 9:00 AM EST"),
-  endTime: Date("March 18, 2020 12:00 PM EST"),
-  reserveTime: Date("March 18, 2020 12:00 PM EST")
+  startTime: new Date(2020, 2, 17, 10, 00),
+  endTime: new Date(2020, 2, 17, 12, 00),
+  reserveTime: new Date(2020, 2, 17, 12, 00)
 });
 router.use(cors());
+
 router.post("/", (req, response) => {
-  newReservation2
-    .save(function(error){
-        if(error) console.log();
-        else response.send(newReservation2);
-    });
-    response.end();
+  console.log(req.body.queryResult.outputContexts[0].parameters.timePeriod.startTime);
+  //console.log(req.body.queryResult.outputContexts);
+  const newRes = Res({
+    custFName: "Neha",
+    custLName: "Nelson",
+    type: "Guaranteed",
+    car: "E82RTY",
+    email: "neha@example.com",
+    username: "n_nelson",
+    resID: 129676,
+    Paid: false,
+    startTime: req.body.queryResult.outputContexts[0].parameters.timePeriod.startTime,
+    reserveTime: req.body.queryResult.outputContexts[0].parameters.timePeriod.endTime,
+    endTime: new Date(2020, 2, 27, 12, 00)
+  });
+  newRes
+    .save()
+    .then(res => response.json(res).catch(err => response.status(400).json(err)));
 });
 router.get("/", (req, response) => {
   Res.find({}, function(err, reservation) {
@@ -59,6 +73,8 @@ router.get("/", (req, response) => {
       response.send("sorry u still suck");
     } else {
       console.log("hello");
+      var d= new Date(2020, 2, 17, 10, 00);
+      console.log(d);
       response.json(reservation);
     }
   });

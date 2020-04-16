@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Moment from 'react-moment';
-import { withRouter } from "react-router-dom";
+
 
 class ReservationTableRow extends React.Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class ReservationTableRow extends React.Component {
         <Button variant = "danger" onClick={this.deleteRes}>Confirm Delete</Button>
       </Modal.Footer>
     </Modal>
-      <tr>
+      <tr data-testid="row">
         <td>{this.props.obj.custFName}</td>
         <td>{this.props.obj.custLName}</td>
         <td>{this.props.obj.username}</td>
@@ -87,4 +87,4 @@ class ReservationTableRow extends React.Component {
     );
   }
 }
-export default withRouter(ReservationTableRow);
+export default ReservationTableRow;

@@ -5,13 +5,13 @@ import Container from "react-bootstrap/Container";
 import ParkingSpot from "./ParkingSpot";
 import axios from "axios";
 import Col from "react-bootstrap/Col";
-
+/* This component allows the garage manager to view spots and their status. In the future,
+it will allow them to add spots and delete spots. */
 class EditLayout extends React.Component {
   constructor(props) {
     super(props);
     this.getData = this.getData.bind(this);
     this.getFloors = this.getFloors.bind(this);
-    //this.getLayout = this.getLayout.bind(this);
     this.state = {
       data: [],
       floors: []

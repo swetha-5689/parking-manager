@@ -85,9 +85,9 @@ class Statistics extends React.Component {
                 </ToggleButtonGroup>
               <span>
               <FormControl
-                type="text"
-                placeholder="Enter Data Range"
-                aria-label="Enter Data Range"
+                type="date"
+                placeholder="Enter Date Range"
+                aria-label="Enter Date Range"
                 aria-describedby="basic-addon1"
               />
               </span>
