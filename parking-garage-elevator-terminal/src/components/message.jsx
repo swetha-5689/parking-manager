@@ -13,24 +13,6 @@ let memCheck = false;
 let reset = 0;
 let inputMemNum = -1;
 
-const myTheme = {
-  header: {
-    primaryColor: "#263238",
-    secondaryColor: "#f9f9f9",
-    highlightColor: "#FFC107",
-    backgroundColor: "#D10101",
-  },
-  body: {
-    primaryColor: "#263238",
-    secondaryColor: "#32a5f2",
-    highlightColor: "#FFC107",
-    backgroundColor: "#f9f9f9",
-  },
-  panel: {
-    backgroundColor: "#CFD8DC",
-  },
-};
-
 class message extends Component {
   constructor(props) {
     super(props);
@@ -350,6 +332,7 @@ class message extends Component {
   waitForInput = () => {
     //Waits for the "Yes"/"No" input to be decided by the user
     if (this.state.memRead === 0) {
+      this.setState({ advanceColor: "gray" });
       setTimeout(this.waitForInput, 50);
       console.log("Waiting...");
       return;
@@ -357,6 +340,7 @@ class message extends Component {
     this.setState({
       promptUser: 0,
       memRead: 0,
+      advanceColor: "white",
     });
     return;
   };
@@ -364,6 +348,7 @@ class message extends Component {
   waitNumpad = () => {
     //Waits for a reservation number to be entered using the numpad
     if (inputMemNum === -1) {
+      this.setState({ advanceColor: "gray" });
       setTimeout(this.waitNumpad, 50);
       console.log("Waiting forNumPad...");
       return;
@@ -371,6 +356,7 @@ class message extends Component {
     console.log("MemNum value " + inputMemNum);
     this.setState({
       promptMemNum: 0,
+      advanceColor: "white",
     });
     return;
   };
@@ -697,7 +683,8 @@ class message extends Component {
                     disabled={
                       !this.state.buttonPressed ||
                       this.state.promptUser ||
-                      this.state.buttonDisabled
+                      this.state.buttonDisabled ||
+                      this.state.promptMemNum
                     }
                   >
                     Advance
