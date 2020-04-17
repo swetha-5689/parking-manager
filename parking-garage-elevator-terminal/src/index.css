@@ -50,3 +50,9 @@ code {
   height: auto;
   display: inline-block;
 }
+
+.MuiPaper-root {
+  width: 500px;
+  height: 500px;
+  font-size: 25px;
+}

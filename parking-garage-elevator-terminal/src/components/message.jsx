@@ -3,7 +3,7 @@ import { devModeEnabled } from "./devMode";
 import DeviceCheck from "./connectedDevices";
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from "reactstrap";
 import Button from "react-bootstrap/Button";
-import QRCode from "./qr-code.png";
+import QRCode from "qrcode.react";
 import NumPad from "react-numpad";
 
 //File for the output message of the SmartPark system, THE MAINFRAME OF THE ELEVATOR FRONT END DISPLAY
@@ -13,31 +13,51 @@ let memCheck = false;
 let reset = 0;
 let inputMemNum = -1;
 
+const myTheme = {
+  header: {
+    primaryColor: "#263238",
+    secondaryColor: "#f9f9f9",
+    highlightColor: "#FFC107",
+    backgroundColor: "#D10101",
+  },
+  body: {
+    primaryColor: "#263238",
+    secondaryColor: "#32a5f2",
+    highlightColor: "#FFC107",
+    backgroundColor: "#f9f9f9",
+  },
+  panel: {
+    backgroundColor: "#CFD8DC",
+  },
+};
+
 class message extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: "Welcome to SmartPark. Please approach the elevator terminal.",
       spinnerOn: 0,
-      canScan: 0,
+      canScan: 0, //CONNECT TO BACK END- LICENSE PLATE NUM
       scanColor: "red",
       resFound: 0,
       resColor: "red",
-      hasMemNum: 0,
-      validMemNum: 0,
+      hasMemNum: 0, //CONNECT TO BACK END - RETRIEVE MEM NUM
+      validMemNum: 0, //CONNECT TO BACK END - CHECK MEM NUM
       memColor: "red",
       buttonPressed: 0,
       promptUser: 0,
       memRead: 0,
       nextScreen: 1,
       buttonDisabled: 0,
-      garageFull: 0,
+      garageFull: 0, //CONNECT TO BACK END - CHECK ALL SPOTS
       garageColor: "red",
       advanceColor: "white",
-      displaySpotNum: 0,
+      displaySpotNum: 0, //CONNECT TO BACK END - SPOT NUMBER WAS FOUND (TRUE/FALSE)
       displayQRCode: 0,
-      spotNum: 0,
-      promptMemNum: 0
+      promptMemNum: 0,
+      spotNum: 0, //CONNECT TO BACK END- SPOT NUMBER
+      resStart: 0, //CONNECT TO BACK END- RESERVATION START TIME
+      resEnd: 0, //CONNECT TO BACK END- RESERVATION END TIME
     };
   }
 
@@ -50,7 +70,7 @@ class message extends Component {
         spinnerOn: 0,
         buttonPressed: 0,
         displaySpotNum: 0,
-        displayQRCode: 0
+        displayQRCode: 0,
       });
       reset = 0;
       inputMemNum = -1;
@@ -59,7 +79,7 @@ class message extends Component {
         this.setState({
           message: "Scanning license plate...",
           spinnerOn: 1,
-          buttonPressed: 1
+          buttonPressed: 1,
         });
         this.disableButton(2000);
 
@@ -67,14 +87,14 @@ class message extends Component {
           setTimeout(() => {
             this.setState({
               message: "License plate successfully scanned.",
-              spinnerOn: 0
+              spinnerOn: 0,
             });
           }, 2000);
         } else {
           setTimeout(() => {
             this.setState({
               message: "License plate could not be scanned.",
-              spinnerOn: 0
+              spinnerOn: 0,
             });
           }, 2000);
         }
@@ -82,7 +102,7 @@ class message extends Component {
         if (this.wasScanned()) {
           this.setState({
             message: "Searching for a reservation...",
-            spinnerOn: 1
+            spinnerOn: 1,
           });
           this.disableButton(2000);
 
@@ -90,28 +110,28 @@ class message extends Component {
             setTimeout(() => {
               this.setState({
                 message: "Reservation found.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 2000);
           } else if (!this.wasResFound()) {
             setTimeout(() => {
               this.setState({
                 message: "Reservation could not be found.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 2000);
           }
         } else {
           if (!promptCheck) {
             this.setState({
-              promptUser: 1
+              promptUser: 1,
             });
             promptCheck = true;
           }
           this.waitForInput();
 
           this.setState({
-            message: "Please press the advance button."
+            message: "Please press the advance button.",
           });
         }
       } else if (this.state.nextScreen == 3) {
@@ -120,7 +140,7 @@ class message extends Component {
             message: "Thank you for parking with us. Your spot number is:",
             spinnerOn: 0,
             displaySpotNum: 1,
-            displayQRCode: 1
+            displayQRCode: 1,
           });
           reset = 1;
         } else if (
@@ -130,31 +150,31 @@ class message extends Component {
         ) {
           this.setState({
             message: "The garage is full. Issuing rain-check...",
-            spinnerOn: 1
+            spinnerOn: 1,
           });
           this.disableButton(2000);
 
           setTimeout(() => {
             this.setState({
               message: "Rain-check issued. We hope to see you again soon!",
-              spinnerOn: 0
+              spinnerOn: 0,
             });
           }, 2000);
           reset = 1;
         } else if (this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
-              "Membership Number search complete. Please press the advance button.",
+              "Reservation number search complete. Please press the advance button.",
             spinnerOn: 0,
-            promptMemNum: 1
+            promptMemNum: 1,
           });
           memCheck = true;
           this.waitNumpad();
         } else if (!this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
-              "You do not have a membership number. Please exit the elevator terminal.",
-            spinnerOn: 0
+              "You do not have a reservation number. Please exit the elevator terminal.",
+            spinnerOn: 0,
           });
           promptCheck = false;
           reset = 1;
@@ -162,14 +182,14 @@ class message extends Component {
           if (!this.wasResFound()) {
             if (!promptCheck) {
               this.setState({
-                promptUser: 1
+                promptUser: 1,
               });
               promptCheck = true;
             }
             this.waitForInput();
 
             this.setState({
-              message: "Please press the advance button."
+              message: "Please press the advance button.",
             });
           }
         }
@@ -177,8 +197,8 @@ class message extends Component {
         if (this.isValidMemNumber() && memCheck) {
           this.setState({
             message:
-              "Valid membership number entered. Searching for reservation...",
-            spinnerOn: 1
+              "Valid reservation number entered. Searching for reservation...",
+            spinnerOn: 1,
           });
 
           this.disableButton(2000);
@@ -187,7 +207,7 @@ class message extends Component {
             setTimeout(() => {
               this.setState({
                 message: "Reservation found.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 2000);
             promptCheck = false;
@@ -197,7 +217,7 @@ class message extends Component {
               this.setState({
                 message:
                   "Reservation could not be found. Please exit the elevator.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 2000);
             promptCheck = false;
@@ -206,8 +226,8 @@ class message extends Component {
         } else if (!this.isValidMemNumber() && memCheck) {
           this.setState({
             message:
-              "Valid membership number could not be found. Please exit the elevator.",
-            spinnerOn: 0
+              "Valid reservation number could not be found. Please exit the elevator.",
+            spinnerOn: 0,
           });
           promptCheck = false;
           memCheck = false;
@@ -221,7 +241,7 @@ class message extends Component {
             message: "Thank you for parking with us. Your spot number is:",
             displaySpotNum: 1,
             displayQRCode: 1,
-            spinnerOn: 0
+            spinnerOn: 0,
           });
           reset = 1;
         } else if (
@@ -231,31 +251,31 @@ class message extends Component {
         ) {
           this.setState({
             message: "The garage is full. Issuing rain-check...",
-            spinnerOn: 1
+            spinnerOn: 1,
           });
           this.disableButton(2000);
 
           setTimeout(() => {
             this.setState({
               message: "Rain-check issued. We hope to see you again soon!",
-              spinnerOn: 0
+              spinnerOn: 0,
             });
           }, 2000);
           reset = 1;
         } else if (this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
-              "Membership Number search complete. Please press the advance button.",
+              "Reservation number search complete. Please press the advance button.",
             spinnerOn: 0,
-            promptMemNum: 1
+            promptMemNum: 1,
           });
           memCheck = true;
           this.waitNumpad();
         } else if (!this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
-              "You do not have a membership number. Please exit the elevator terminal.",
-            spinnerOn: 0
+              "You do not have a reservation number. Please exit the elevator terminal.",
+            spinnerOn: 0,
           });
           promptCheck = false;
           reset = 1;
@@ -264,8 +284,8 @@ class message extends Component {
         if (this.isValidMemNumber() && memCheck) {
           this.setState({
             message:
-              "Valid membership number entered. Searching for reservation...",
-            spinnerOn: 1
+              "Valid reservation number entered. Searching for reservation...",
+            spinnerOn: 1,
           });
 
           if (this.wasResFound()) {
@@ -273,7 +293,7 @@ class message extends Component {
             setTimeout(() => {
               this.setState({
                 message: "Reservation found.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 2000);
             promptCheck = false;
@@ -284,7 +304,7 @@ class message extends Component {
               this.setState({
                 message:
                   "Reservation could not be found. Please exit the elevator.",
-                spinnerOn: 0
+                spinnerOn: 0,
               });
             }, 4000);
             promptCheck = false;
@@ -294,8 +314,8 @@ class message extends Component {
         } else if (!this.isValidMemNumber()) {
           this.setState({
             message:
-              "Valid membership number could not be found. Please exit the elevator.",
-            spinnerOn: 0
+              "Valid reservation number could not be found. Please exit the elevator.",
+            spinnerOn: 0,
           });
           promptCheck = false;
           reset = 1;
@@ -304,20 +324,20 @@ class message extends Component {
             message: "Thank you for parking with us. Your spot number is:",
             spinnerOn: 0,
             displaySpotNum: 1,
-            displayQRCode: 1
+            displayQRCode: 1,
           });
           reset = 1;
         } else if (this.wasResFound() && this.isGarageFull()) {
           this.setState({
             message: "The garage is full. Issuing rain-check...",
-            spinnerOn: 1
+            spinnerOn: 1,
           });
           this.disableButton(2000);
 
           setTimeout(() => {
             this.setState({
               message: "Rain-check issued. We hope to see you again soon!",
-              spinnerOn: 0
+              spinnerOn: 0,
             });
           }, 2000);
           reset = 1;
@@ -336,13 +356,13 @@ class message extends Component {
     }
     this.setState({
       promptUser: 0,
-      memRead: 0
+      memRead: 0,
     });
     return;
   };
 
   waitNumpad = () => {
-    //Waits for a membership number to be entered using the numpad
+    //Waits for a reservation number to be entered using the numpad
     if (inputMemNum === -1) {
       setTimeout(this.waitNumpad, 50);
       console.log("Waiting forNumPad...");
@@ -350,7 +370,7 @@ class message extends Component {
     }
     console.log("MemNum value " + inputMemNum);
     this.setState({
-      promptMemNum: 0
+      promptMemNum: 0,
     });
     return;
   };
@@ -383,7 +403,7 @@ class message extends Component {
   };
 
   isValidMemNumber = () => {
-    //Checks to see if a valid membership number exists.
+    //Checks to see if a valid reservation number exists.
     //if number successfully found in database, return 1
     //otherwise, return 0
     if (this.state.validMemNum == 1) {
@@ -407,12 +427,12 @@ class message extends Component {
     if (this.state.resFound == 0) {
       this.setState({
         resFound: 1,
-        resColor: "green"
+        resColor: "green",
       });
     } else if (this.state.resFound == 1) {
       this.setState({
         resFound: 0,
-        resColor: "red"
+        resColor: "red",
       });
     }
   };
@@ -422,27 +442,27 @@ class message extends Component {
     if (this.state.canScan == 0) {
       this.setState({
         canScan: 1,
-        scanColor: "green"
+        scanColor: "green",
       });
     } else if (this.state.canScan == 1) {
       this.setState({
         canScan: 0,
-        scanColor: "red"
+        scanColor: "red",
       });
     }
   };
 
   updateMemButton = () => {
-    //Updates the "has a valid membership number" button to be true or false
+    //Updates the "has a valid reservation number" button to be true or false
     if (this.state.validMemNum == 0) {
       this.setState({
         validMemNum: 1,
-        memColor: "green"
+        memColor: "green",
       });
     } else if (this.state.validMemNum == 1) {
       this.setState({
         validMemNum: 0,
-        memColor: "red"
+        memColor: "red",
       });
     }
   };
@@ -452,23 +472,23 @@ class message extends Component {
     if (this.state.garageFull == 0) {
       this.setState({
         garageFull: 1,
-        garageColor: "green"
+        garageColor: "green",
       });
     } else if (this.state.garageFull == 1) {
       this.setState({
         garageFull: 0,
-        garageColor: "red"
+        garageColor: "red",
       });
     }
   };
 
   noButton = () => {
-    //Sets the state of if the customer does not have a membership number.
+    //Sets the state of if the customer does not have a reservation number.
     this.setState({ hasMemNum: 0, memRead: 1 });
   };
 
   yesButton = () => {
-    //Sets the state of if the customer does have a membership number.
+    //Sets the state of if the customer does have a reservation number.
     this.setState({ hasMemNum: 1, memRead: 1 });
   };
 
@@ -476,26 +496,41 @@ class message extends Component {
     //The button for advancing the screen.
     if (!reset) {
       this.setState({
-        nextScreen: this.state.nextScreen + 1
+        nextScreen: this.state.nextScreen + 1,
       });
     } else {
       this.setState({
-        nextScreen: 1
+        nextScreen: 1,
       });
     }
 
     this.advanceScreen();
   };
 
-  disableButton = time => {
+  disableButton = (time) => {
     //Disables a button from being pressed for a given amount of time.
     this.setState({
       buttonDisabled: 1,
-      advanceColor: "gray"
+      advanceColor: "gray",
     });
     setTimeout(() => {
       this.setState({ buttonDisabled: 0, advanceColor: "white" });
     }, time);
+  };
+
+  qrMessage = () => {
+    return (
+      "Thank you for parking with us. Your reservation information is:" +
+      "\n" +
+      "Spot Number: " +
+      this.state.spotNum +
+      "\n" +
+      "Reservation Start Time: " +
+      this.state.resStart +
+      "\n" +
+      "Reservation End Time: " +
+      this.state.resEnd
+    );
   };
 
   render() {
@@ -511,21 +546,15 @@ class message extends Component {
                     style={{
                       marginTop: "5%",
                       marginBottom: "10%",
-                      fontSize: 75
+                      fontSize: 75,
                     }}
                   >
-                    Please enter your membership number, then press the check
+                    Please enter your reservation number, then press the check
                     button.
                   </div>
-                  <div
-                    style={{
-                      height: 250,
-                      width: "100%",
-                      marginBottom: "5%"
-                    }}
-                  >
+                  <div>
                     <NumPad.Number
-                      onChange={value => {
+                      onChange={(value) => {
                         inputMemNum = value;
                       }}
                       inline={true}
@@ -540,7 +569,7 @@ class message extends Component {
                     className="h1 text-black text-center"
                     style={{
                       marginTop: "15%",
-                      fontSize: 75
+                      fontSize: 75,
                     }}
                   >
                     {this.state.message}
@@ -566,10 +595,10 @@ class message extends Component {
                         style={{
                           height: 200,
                           width: "100%",
-                          marginTop: "3%"
+                          marginTop: "3%",
                         }}
                       >
-                        <img src={QRCode} height="100%" alt="Spot QR Code" />
+                        <QRCode value={this.qrMessage()} />
                       </div>
                     ) : null}{" "}
                   </div>
@@ -582,7 +611,7 @@ class message extends Component {
                 <h1
                   style={{ marginTop: "5%", marginBottom: "12%", fontSize: 75 }}
                 >
-                  Do you have a membership number?
+                  Do you have a reservation number?
                 </h1>
                 <button
                   class="m-5 button bigButton"
@@ -597,7 +626,7 @@ class message extends Component {
                   style={{
                     marginTop: "15%",
                     marginLeft: "15%",
-                    backgroundColor: "red"
+                    backgroundColor: "red",
                   }}
                   onClick={this.noButton}
                 >
@@ -644,7 +673,7 @@ class message extends Component {
                   disabled={this.state.buttonPressed}
                   style={{ backgroundColor: this.state.memColor }}
                 >
-                  Valid Membership Number?
+                  Valid Reservation Number?
                 </button>
 
                 <button
@@ -662,7 +691,7 @@ class message extends Component {
                   <button
                     class="button2 bigButton text-dark float-right"
                     style={{
-                      backgroundColor: this.state.advanceColor
+                      backgroundColor: this.state.advanceColor,
                     }}
                     onClick={this.advanceButton}
                     disabled={
