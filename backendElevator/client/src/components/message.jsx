@@ -85,6 +85,9 @@ class message extends Component {
             resID: response.data.resID,
           },
           function () {
+            if (this.state.resID != "No Reservation Found") {
+              this.setState({ resFound: 1 });
+            }
             this.getReservedSpot(this.state.resID);
           }
         );
@@ -714,24 +717,6 @@ class message extends Component {
                 />
               </form>
               <div>
-                <button
-                  type="button"
-                  class="btn btn-circle btn-xl m-3 text-white"
-                  onClick={this.updateScanButton}
-                  disabled={this.state.buttonPressed}
-                  style={{ backgroundColor: this.state.scanColor }}
-                >
-                  License Plate can be Scanned?
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-circle btn-xl text-white"
-                  onClick={this.updateResButton}
-                  disabled={this.state.buttonPressed}
-                  style={{ backgroundColor: this.state.resColor }}
-                >
-                  Customer has a Reservation?
-                </button>
                 <button
                   type="button"
                   class="btn btn-circle btn-xl m-3 text-white"
