@@ -35,8 +35,8 @@ router.get("/searchPlate/:licensePlate", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/searchResID/:resID", (req, res) => {
-  Customer.findOne({ resID: req.params.resID })
+router.get("/searchResID/:input", (req, res) => {
+  Customer.findOne({ licensePlate: req.params.licensePlate })
     .then((customers) => res.json(customers))
     .catch((err) => res.status(400).json(err));
 });

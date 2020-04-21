@@ -91,9 +91,9 @@ class message extends Component {
       });
   }
 
-  searchResID(id) {
+  searchResID(input) {
     axios
-      .get("http://localhost:5000/api/spots/searchResID/" + id)
+      .get("http://localhost:5000/api/customers/searchResID/" + input)
       .then((response) => {
         this.setState({
           resID: response.data.resID,
