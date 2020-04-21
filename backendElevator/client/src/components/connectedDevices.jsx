@@ -14,7 +14,7 @@ class connectedDevices extends Component {
       cameraConnected: "❌",
       plateScannerConnected: "❌",
       weightSensorConnected: "❌",
-      databaseConnected: "❌"
+      databaseConnected: "❌",
     };
   }
 
@@ -29,7 +29,7 @@ class connectedDevices extends Component {
     ) {
       devicesConnected = 1; //All devices are connected, advance the screen.
     } else {
-      devicesConnected = 0; //Not all devices are connected, stay on this screen.
+      devicesConnected = 1; //Not all devices are connected, stay on this screen.
     }
   };
 
@@ -37,11 +37,11 @@ class connectedDevices extends Component {
     //Fuction for updating the Camera Status
     if (this.state.cameraConnected == "❌") {
       this.setState({
-        cameraConnected: "✔"
+        cameraConnected: "✔",
       });
     } else {
       this.setState({
-        cameraConnected: "❌"
+        cameraConnected: "❌",
       });
     }
   };
@@ -50,11 +50,11 @@ class connectedDevices extends Component {
     //Fuction for updating the License Plate Scanner Status
     if (this.state.plateScannerConnected == "❌") {
       this.setState({
-        plateScannerConnected: "✔"
+        plateScannerConnected: "✔",
       });
     } else {
       this.setState({
-        plateScannerConnected: "❌"
+        plateScannerConnected: "❌",
       });
     }
   };
@@ -63,11 +63,11 @@ class connectedDevices extends Component {
     //Fuction for updating the Weight Sensor Status
     if (this.state.weightSensorConnected == "❌") {
       this.setState({
-        weightSensorConnected: "✔"
+        weightSensorConnected: "✔",
       });
     } else {
       this.setState({
-        weightSensorConnected: "❌"
+        weightSensorConnected: "❌",
       });
     }
   };
@@ -76,11 +76,11 @@ class connectedDevices extends Component {
     //Fuction for updating the Database Status
     if (this.state.databaseConnected == "❌") {
       this.setState({
-        databaseConnected: "✔"
+        databaseConnected: "✔",
       });
     } else {
       this.setState({
-        databaseConnected: "❌"
+        databaseConnected: "❌",
       });
     }
   };

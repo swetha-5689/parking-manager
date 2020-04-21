@@ -13,6 +13,7 @@ let promptCheck = false;
 let memCheck = false;
 let reset = 0;
 let inputMemNum = -1;
+let scanSuccess;
 
 class message extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class message extends Component {
       resStart: 0, //CONNECT TO BACK END- RESERVATION START TIME
       resEnd: 0, //CONNECT TO BACK END- RESERVATION END TIME
       licensePlate: "No License Plate Found",
-      referencePlate: "SDK-111",
+      referencePlate: "",
       resID: "No Reservation Found",
       referenceResID: null,
     };
@@ -52,8 +53,49 @@ class message extends Component {
     axios
       .get("http://localhost:5000/api/customers/searchPlate/" + scannedPlate)
       .then((response) => {
+        this.setState(
+          {
+            licensePlate: response.data.licensePlate,
+          },
+          function () {
+            if (this.state.licensePlate === this.state.referencePlate) {
+              console.log("Plate!!");
+              this.searchResID(this.state.licensePlate);
+              this.setState({ canScan: 1 }, function () {
+                setTimeout(() => {
+                  this.setState({
+                    message: "License plate successfully scanned.",
+                    spinnerOn: 0,
+                  });
+                }, 2000);
+              });
+            } else {
+              scanSuccess = false;
+              setTimeout(() => {
+                this.setState({
+                  message: "License plate could not be scanned.",
+                  spinnerOn: 0,
+                });
+              }, 2000);
+            }
+          }
+        );
+        this.setState(
+          {
+            resID: response.data.resID,
+          },
+          function () {
+            this.getReservedSpot(this.state.resID);
+          }
+        );
+      });
+  }
+
+  searchResID(id) {
+    axios
+      .get("http://localhost:5000/api/spots/searchResID/" + id)
+      .then((response) => {
         this.setState({
-          licensePlate: response.data.licensePlate,
           resID: response.data.resID,
         });
       });
@@ -69,14 +111,8 @@ class message extends Component {
       });
   }
 
-  searchResID(id) {
-    axios
-      .get("http://localhost:5000/api/spots/searchResID/" + id)
-      .then((response) => {
-        this.setState({
-          resID: response.data.resID,
-        });
-      });
+  handleChange(event) {
+    this.setState({ referencePlate: event.target.value });
   }
 
   advanceScreen = () => {
@@ -100,33 +136,11 @@ class message extends Component {
           buttonPressed: 1,
         });
 
+        this.searchLicensePlate(this.state.referencePlate);
+
         this.disableButton(2000);
 
-        this.setState({ referencePlate: "SDK-111" });
-
-        this.searchLicensePlate("SDK-111");
-
-        if (this.state.licensePlate === this.state.referencePlate) {
-          this.setState({ canScan: 1 });
-          this.getReservedSpot(this.state.resID);
-        }
-
-        if (this.wasScanned()) {
-          setTimeout(() => {
-            this.setState({
-              message: "License plate successfully scanned.",
-              spinnerOn: 0,
-              resFound: 1,
-            });
-          }, 2000);
-        } else {
-          setTimeout(() => {
-            this.setState({
-              message: "License plate could not be scanned.",
-              spinnerOn: 0,
-            });
-          }, 2000);
-        }
+        // this.getReservedSpot(this.state.resID);
       } else if (this.state.nextScreen == 2) {
         if (this.wasScanned()) {
           this.setState({
@@ -393,6 +407,14 @@ class message extends Component {
     return;
   };
 
+  waitForPlateUpdate = () => {
+    if (this.state.licensePlate === "No License Plate Found") {
+      setTimeout(this.waitForPlateUpdate, 50);
+      console.log("Waiting...");
+    }
+    return;
+  };
+
   waitNumpad = () => {
     //Waits for a reservation number to be entered using the numpad
     if (inputMemNum === -1) {
@@ -473,17 +495,17 @@ class message extends Component {
 
   updateScanButton = () => {
     //Updates the "license plate can be scanned" button to be true or false
-    if (this.state.canScan == 0) {
-      this.setState({
-        canScan: 1,
-        scanColor: "green",
-      });
-    } else if (this.state.canScan == 1) {
-      this.setState({
-        canScan: 0,
-        scanColor: "red",
-      });
-    }
+    //  if (this.state.canScan == 0) {
+    //  this.setState({
+    //  canScan: 1,
+    //scanColor: "green",
+    //});
+    //} else if (this.state.canScan == 1) {
+    //this.setState({
+    //canScan: 0,
+    //scanColor: "red",
+    //});
+    //}
   };
 
   updateMemButton = () => {
@@ -681,7 +703,16 @@ class message extends Component {
               >
                 Start Elevator Sequence
               </button>
-
+              <br></br>
+              <form>
+                <input
+                  type="text"
+                  name="topicBox"
+                  placeholder="Enter License Plate Number"
+                  value={this.state.referencePlate}
+                  onChange={this.handleChange.bind(this)}
+                />
+              </form>
               <div>
                 <button
                   type="button"
