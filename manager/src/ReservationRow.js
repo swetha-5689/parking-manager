@@ -31,6 +31,7 @@ class ReservationTableRow extends React.Component {
         console.log(error);
       });
     this.props.data();
+    window.location.reload();
     this.hideModal();
     
   }
@@ -38,7 +39,7 @@ class ReservationTableRow extends React.Component {
     axios
       .get("http://localhost:4000/api/res/")
       .then(response => {
-        this.setState({ data: response.data });
+        this.props({ data: response.data });
       })
       .catch(function(error) {
         console.log(error);
@@ -82,6 +83,7 @@ class ReservationTableRow extends React.Component {
           )}
         </td>
       </tr>
+      
       </>
     );
   }

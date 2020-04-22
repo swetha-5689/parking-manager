@@ -22,7 +22,7 @@ class Reservations extends React.Component {
         })
         .catch(function (error) {
             console.log(error);
-        })
+        });
   }
   changeData() {
     axios.get('http://localhost:4000/api/res/')
@@ -31,12 +31,13 @@ class Reservations extends React.Component {
         })
         .catch(function (error) {
             console.log(error);
-        })
+        });
   }
   resTable() {
     return this.state.data.map((response, i) => {
-      return <ReservationTableRow obj={response} key={i} data = {this.changeData}/>;
+      return <ReservationTableRow obj={response} key={i} data = {this.changeData} />;
     });
+    
   }
   render() {
     return (
@@ -61,7 +62,6 @@ class Reservations extends React.Component {
               <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Username</th>
                 <th>Reservation Type</th>
                 <th>Paid Status</th>
                 <th>Stay Period</th>
@@ -76,6 +76,7 @@ class Reservations extends React.Component {
             </tbody>
           </Table>
         </Container>
+        
       </div>
     );
   }
