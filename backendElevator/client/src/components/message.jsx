@@ -104,7 +104,19 @@ class message extends Component {
       });
   }
 
+  searchResIDInput(input) {
+    //Used when customer manually enters reservation ID
+    axios
+      .get("http://localhost:5000/api/customers/searchResIDInput/" + input)
+      .then((response) => {
+        this.setState({
+          resID: response.data.resID,
+        });
+      });
+  }
+
   getReservedSpot(id) {
+    //Takes a reservation ID as an input and returns the spot number registered to it
     axios
       .get("http://localhost:5000/api/spots/searchResID/" + id)
       .then((response) => {

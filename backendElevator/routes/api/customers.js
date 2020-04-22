@@ -41,6 +41,12 @@ router.get("/searchResID/:input", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+router.get("/searchResIDInput/:input", (req, res) => {
+  Customer.findOne({ resID: req.params.resID })
+    .then((customers) => res.json(customers))
+    .catch((err) => res.status(400).json(err));
+});
+
 router.delete("/deleteCustomer/:name", (req, res) => {
   Customer.findOne({ name: req.params.name })
     .then((customers) =>
