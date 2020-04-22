@@ -10,7 +10,6 @@ var newReservation = Res({
   type: "Confirmed",
   car: "E43RET",
   email: "aniqa@example.com",
-  username: "a_rahim",
   resID: 129229,
   Paid: true,
   startTime: new Date(2020, 2, 27, 9, 00),
@@ -23,7 +22,6 @@ var newReservation2 = Res({
   type: "Confirmed",
   car: "E85DBY",
   email: "jeffrey@sample.com",
-  username: "j_samson",
   resID: 129242,
   Paid: false,
   startTime: new Date(2020, 2, 27, 9, 00),
@@ -36,7 +34,6 @@ var newReservation3 = Res({
   type: "Guaranteed",
   car: "E82RTY",
   email: "neha@example.com",
-  username: "n_nelson",
   resID: 129652,
   Paid: false,
   startTime: new Date(2020, 2, 17, 10, 00),
@@ -54,7 +51,6 @@ router.post("/", (req, response) => {
     type: "Guaranteed",
     car: "E82RTY",
     email: "neha@example.com",
-    username: "n_nelson",
     resID: 129676,
     Paid: false,
     startTime: req.body.queryResult.outputContexts[0].parameters.timePeriod.startTime,
@@ -73,7 +69,7 @@ router.get("/", (req, response) => {
       response.send("sorry u still suck");
     } else {
       console.log("hello");
-      var d= new Date(2020, 2, 17, 10, 00);
+      var d = new Date(2020, 2, 17, 10, 00);
       console.log(d);
       response.json(reservation);
     }

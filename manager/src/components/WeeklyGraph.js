@@ -1,27 +1,27 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-
+import axios from "axios";
 class ChartsPage extends React.Component {
     state = {
         dataBar: {
             labels: [
                 "Overstays",
-                "Reservations",
+                "Understays",
                 "No-Shows",
-                "RainChecks",
                 "Availabilities",
                 "Occupancies",
-                "Walk-ins"
+                "Walk-ins",
+                "Confirmed"
             ],
             datasets: [
                 {
                     label: "# of Customers",
-                    data: [2000, 15000, 500, 1000, 1500, 3000, 500],
+                    data: [],
                     backgroundColor: [
-                        "rgba(255, 134,159,0.4)",
-                        "rgba(98,  182, 239,0.4)",
-                        "rgba(255, 218, 128,0.4)",
+                        "rgba(255, 134, 159, 0.4)",
+                        "rgba(98,  182, 239, 0.4)",
+                        "rgba(255, 218, 128, 0.4)",
                         "rgba(113, 205, 205,0.4)",
                         "rgba(170, 128, 252,0.4)",
                         "rgba(255, 177, 101,0.4)"
@@ -65,7 +65,24 @@ class ChartsPage extends React.Component {
             }
         }
     };
-    
+    componentDidMount(){
+        axios
+            .get("http://localhost:4000/api/stats/")
+              .then(response => {
+                  var statsData = {...this.state.dataBar};
+                  statsData.datasets[0].data[0] = response.data[0].OverstayCount;
+                  statsData.datasets[0].data[1] = response.data[0].UnderstayCount;
+                  statsData.datasets[0].data[2] = response.data[0].noShowCount;
+                  statsData.datasets[0].data[3] = response.data[0].AvailCount;
+                  statsData.datasets[0].data[4] = response.data[0].OccupancyCount;
+                  statsData.datasets[0].data[5] = response.data[0].WalkinCount;
+                  statsData.datasets[0].data[6] = response.data[0].ConfirmedCount;
+                this.setState({ statsData });
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+    }
     render() {
         return (
             <MDBContainer>

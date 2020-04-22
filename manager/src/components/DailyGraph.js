@@ -9,10 +9,10 @@ class ChartsPage extends React.Component {
                 "Overstays",
                 "Reservations",
                 "No-Shows",
-                "RainChecks",
                 "Availabilities",
                 "Occupancies",
-                "Walk-ins"
+                "Walk-ins",
+                "Confirmed"
             ],
             datasets: [
                 {

@@ -13,7 +13,7 @@ var ReservationSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ["Walk-in", "Guaranteed", "Confirmed"],
+        enum: ["Walk-in", "Confirmed", "No-Show"],
         required: true
     },
     car: {
@@ -33,16 +33,13 @@ var ReservationSchema = new Schema({
     reserveTime: {
         type: Date
     },
-    username: {
-        type: String,
-        required: true
-    },
     Paid: {
         type: Boolean,
         required: true
     },
     resID: {
         type: Number,
+        unique: true,
         required: true
     }
 },
