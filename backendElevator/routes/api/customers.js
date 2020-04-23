@@ -32,7 +32,8 @@ router.post("/addCustomer", (req, res) => {
 router.get("/searchPlate/:licensePlate", (req, res) => {
   Customer.findOne({ licensePlate: req.params.licensePlate })
     .then((customers) => res.json(customers))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).json(err))
+    .catch((NULL) => res.json({ licensePlate: "" }));
 });
 
 router.get("/searchResID/:licensePlate", (req, res) => {

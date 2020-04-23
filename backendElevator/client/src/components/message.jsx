@@ -74,14 +74,13 @@ class message extends Component {
               });
             } else {
               scanSuccess = false;
-              this.setState({ canScan: 0 }, function () {
-                setTimeout(() => {
-                  this.setState({
-                    message: "License plate could not be scanned.",
-                    spinnerOn: 0,
-                  });
-                }, 2000);
-              });
+
+              setTimeout(() => {
+                this.setState({
+                  message: "License plate could not be scanned.",
+                  spinnerOn: 0,
+                });
+              }, 2000);
             }
           }
         );

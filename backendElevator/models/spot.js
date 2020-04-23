@@ -13,7 +13,7 @@ const SpotSchema = new Schema({
   },
   resID: {
     type: String,
-    required: true,
+    required: false,
   },
   isVacant: {
     type: Boolean,
