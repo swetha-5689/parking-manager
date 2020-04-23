@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import QRCode from "qrcode.react";
 import NumPad from "react-numpad";
 import axios from "axios";
+import plateList from "./plateList";
+//import Math from "mathjs";
 
 //File for the output message of the SmartPark system, THE MAINFRAME OF THE ELEVATOR FRONT END DISPLAY
 
@@ -14,6 +16,7 @@ let memCheck = false;
 let reset = 0;
 let inputMemNum = -1;
 let scanSuccess;
+var plateInput = plateList[Math.floor(Math.random() * plateList.length)];
 
 class message extends Component {
   constructor(props) {
@@ -43,7 +46,7 @@ class message extends Component {
       resStart: 0, //CONNECT TO BACK END- RESERVATION START TIME
       resEnd: 0, //CONNECT TO BACK END- RESERVATION END TIME
       licensePlate: "No License Plate Found",
-      referencePlate: "",
+      referencePlate: plateInput,
       resID: "No Reservation Found",
       referenceResID: null,
     };
@@ -151,6 +154,11 @@ class message extends Component {
           buttonPressed: 1,
         });
 
+        this.setState({
+          message: "Scanned " + this.state.referencePlate,
+          spinnerOn: 1,
+          buttonPressed: 1,
+        });
         this.searchLicensePlate(this.state.referencePlate);
 
         this.disableButton(2000);
@@ -719,6 +727,8 @@ class message extends Component {
                 Start Elevator Sequence
               </button>
               <br></br>
+
+              {/*
               <form>
                 <input
                   type="text"
@@ -728,6 +738,7 @@ class message extends Component {
                   onChange={this.handleChange.bind(this)}
                 />
               </form>
+              */}
               <div>
                 <button
                   type="button"
