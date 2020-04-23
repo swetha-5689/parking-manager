@@ -67,22 +67,25 @@ class message extends Component {
               this.setState({ canScan: 1 }, function () {
                 setTimeout(() => {
                   this.setState({
-                    message: "License plate successfully scanned.",
+                    message: "License plate successfully found.",
                     spinnerOn: 0,
                   });
                 }, 2000);
               });
             } else {
               scanSuccess = false;
-              setTimeout(() => {
-                this.setState({
-                  message: "License plate could not be scanned.",
-                  spinnerOn: 0,
-                });
-              }, 2000);
+              this.setState({ canScan: 0 }, function () {
+                setTimeout(() => {
+                  this.setState({
+                    message: "License plate could not be scanned.",
+                    spinnerOn: 0,
+                  });
+                }, 2000);
+              });
             }
           }
         );
+
         this.setState(
           {
             resID: response.data.resID,
@@ -91,7 +94,7 @@ class message extends Component {
             if (this.state.resID != "No Reservation Found") {
               this.setState({ resFound: 1 });
             }
-            this.getReservedSpot(this.state.resID);
+            //this.getReservedSpot(this.state.resID);
           }
         );
       });
@@ -166,10 +169,15 @@ class message extends Component {
         // this.getReservedSpot(this.state.resID);
       } else if (this.state.nextScreen == 2) {
         if (this.wasScanned()) {
-          this.setState({
-            message: "Searching for a reservation...",
-            spinnerOn: 1,
-          });
+          this.setState(
+            {
+              message: "Searching for a reservation...",
+              spinnerOn: 1,
+            },
+            function () {
+              this.getReservedSpot(this.state.resID);
+            }
+          );
 
           this.disableButton(2000);
 

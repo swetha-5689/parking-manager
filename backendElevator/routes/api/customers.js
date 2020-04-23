@@ -35,13 +35,13 @@ router.get("/searchPlate/:licensePlate", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/searchResID/:input", (req, res) => {
+router.get("/searchResID/:licensePlate", (req, res) => {
   Customer.findOne({ licensePlate: req.params.licensePlate })
     .then((customers) => res.json(customers))
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/searchResIDInput/:input", (req, res) => {
+router.get("/searchResIDInput/:resID", (req, res) => {
   Customer.findOne({ resID: req.params.resID })
     .then((customers) => res.json(customers))
     .catch((err) => res.status(400).json(err));

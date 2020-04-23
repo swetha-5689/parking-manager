@@ -35,8 +35,8 @@ router.get("/:spotNumber", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/searchResID/:input", (req, res) => {
-  Spot.findOne({ licensePlate: req.params.licensePlate })
+router.get("/searchResID/:resID", (req, res) => {
+  Spot.findOne({ resID: req.params.resID })
     .then((spots) => res.json(spots))
     .catch((err) => res.status(400).json(err));
 });
