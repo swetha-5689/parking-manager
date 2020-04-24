@@ -648,6 +648,17 @@ class message extends Component {
                       negative={false}
                       decimal={false}
                     />
+                    {/*
+                    <NumPad.Number
+                      onChange={(value) => {
+                        console.log("value", value);
+                      }}
+                      label={"Total"}
+                      placeholder={"my placeholder"}
+                      value={100}
+                    
+                    />
+                    */}
                   </div>
                 </div>
               ) : (
