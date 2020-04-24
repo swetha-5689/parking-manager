@@ -21,6 +21,7 @@ var plateInput = plateList[Math.floor(Math.random() * plateList.length)];
 class message extends Component {
   constructor(props) {
     super(props);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       message: "Welcome to SmartPark. Please approach the elevator terminal.",
       spinnerOn: 0,
@@ -140,7 +141,7 @@ class message extends Component {
   }
 
   handleChange(event) {
-    this.setState({ referencePlate: event.target.value });
+    this.setState({ referenceResID: event.target.value });
   }
 
   advanceScreen = () => {
@@ -348,18 +349,15 @@ class message extends Component {
           }, 2000);
           reset = 1;
         } else if (this.state.hasMemNum && promptCheck) {
-          this.setState(
-            {
-              message:
-                "Reservation number search complete. Please press the advance button." +
-                this.state.referenceResID,
-              spinnerOn: 0,
-              promptMemNum: 1,
-            },
-            function () {
-              this.searchResIDInput(this.state.referenceResID);
-            }
-          );
+          this.searchResIDInput(this.state.referenceResID);
+
+          this.setState({
+            message:
+              "Reservation number search complete. Please press the advance button." +
+              this.state.referenceResID,
+            spinnerOn: 0,
+            promptMemNum: 1,
+          });
 
           memCheck = true;
           this.waitNumpad();
@@ -637,6 +635,11 @@ class message extends Component {
     );
   };
 
+  onSubmit(e) {
+    e.preventDefault();
+    this.setState({ referenceResID: this.input.value });
+  }
+
   render() {
     return (
       <div>
@@ -654,29 +657,28 @@ class message extends Component {
                     }}
                   >
                     Please enter your reservation number, then press the check
-                    button.
+                    button. {this.state.referenceResID}
                   </div>
                   <div>
                     <NumPad.Number
+                      //onChange={this.handleChange.bind(this)}
                       onChange={(value) => {
-                        inputMemNum = value;
-                        this.setState({ referenceResID: inputMemNum });
+                        this.handleChange.bind(this);
                       }}
                       inline={true}
                       negative={false}
                       decimal={false}
                     />
                     {/*
-                    <NumPad.Number
-                      onChange={(value) => {
-                        console.log("value", value);
-                      }}
-                      label={"Total"}
-                      placeholder={"my placeholder"}
-                      value={100}
-                    
-                    />
-                    */}
+                    <form onSubmit={this.onSubmit}>
+                      <label>Reservation ID </label>
+                      <input
+                        type="text"
+                        name="resID"
+                        ref={(input) => (this.input = input)}
+                      />
+                    </form>
+                  */}
                   </div>
                 </div>
               ) : (
