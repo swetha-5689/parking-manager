@@ -4,51 +4,8 @@ var cors = require('cors');
 const Res = require("../models/ResModel");
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
-var newReservation = Res({
-  custFName: "Aniqa",
-  custLName: "Rahim",
-  type: "Confirmed",
-  car: "E43RET",
-  email: "aniqa@example.com",
-  resID: 129229,
-  Paid: true,
-  startTime: new Date(2020, 2, 27, 9, 00),
-  endTime: new Date(2020, 2, 27, 12, 00),
-  reserveTime: new Date(2020, 2, 27, 12, 00)
-});
-var newReservation2 = Res({
-  custFName: "Jeffrey",
-  custLName: "Samson",
-  type: "Confirmed",
-  car: "E85DBY",
-  email: "jeffrey@sample.com",
-  resID: 129242,
-  Paid: false,
-  startTime: new Date(2020, 2, 27, 9, 00),
-  endTime: new Date(2020, 2, 27, 12, 00),
-  reserveTime: new Date(2020, 2, 27, 12, 00)
-});
-var newReservation3 = Res({
-  custFName: "Neha",
-  custLName: "Nelson",
-  type: "Guaranteed",
-  car: "E82RTY",
-  email: "neha@example.com",
-  resID: 129652,
-  Paid: false,
-  startTime: new Date(2020, 2, 17, 10, 00),
-  endTime: new Date(2020, 2, 17, 12, 00),
-  reserveTime: new Date(2020, 2, 17, 12, 00)
-});
 router.use(cors());
-function dateSetter (d1, d2, d3) {
-  var startTime = new Date();
-  var endTime = new Date();
-  startTime = d1;
-  endTime = d1;
-  startTime.setHours(d2.getHours());
-  return ([startTime, endTime]);
-}
+
 router.post("/", (req, response) => {
   var name = req.body.queryResult.parameters.name.name;
   var name = name.split(" ");

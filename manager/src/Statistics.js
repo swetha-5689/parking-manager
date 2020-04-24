@@ -86,19 +86,6 @@ class Statistics extends React.Component {
                                         Yearly
                                     </ToggleButton>
                                 </ToggleButtonGroup>
-                                {/* Search Bar: Not yet functional, need to connect to backend*/}
-                                <span>
-                                    <FormControl
-                                        type="text"
-                                        placeholder="Enter Data Range"
-                                        aria-label="Enter Data Range"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </span>
-                                {/* Search Button: Not yet functional, need to connect to backend*/}
-                                <Button variant="outline-secondary">
-                                    Search
-                                </Button>
                             </div>
                         </InputGroup>
                     </Form>

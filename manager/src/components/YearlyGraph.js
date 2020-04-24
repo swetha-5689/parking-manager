@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-
+import Moment from 'react-moment';
 class ChartsPage extends React.Component {
     state = {
         dataBar: {
@@ -69,7 +69,7 @@ class ChartsPage extends React.Component {
     render() {
         return (
             <MDBContainer>
-                <h3 className="mt-5">Year of 2020</h3>
+                <h3 className="mt-5">Year of <Moment format = 'YYYY'>{Date.now()}</Moment></h3>
                 <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
             </MDBContainer>
         );

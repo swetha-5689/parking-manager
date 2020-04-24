@@ -7,6 +7,7 @@ router.get("/", (req, response) => {
   Res.aggregate([
     {
       '$project': {
+        'startTime': 1, 
         'overstay': {
           '$toInt': {
             '$gt': [
@@ -75,10 +76,10 @@ router.get("/", (req, response) => {
           '$sum': '$walkin'
         }, 
         'AvailCount': {
-          '$sum': 2
+          '$sum': 25
         }, 
         'OccupancyCount': {
-          '$sum': 4
+          '$sum': 34
         }, 
         'noShowCount': {
           '$sum': '$noShow'
