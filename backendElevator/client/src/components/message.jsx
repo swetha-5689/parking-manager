@@ -68,7 +68,7 @@ class message extends Component {
               this.setState({ canScan: 1 }, function () {
                 setTimeout(() => {
                   this.setState({
-                    message: "License plate successfully found.",
+                    //message: "License plate successfully found.",
                     spinnerOn: 0,
                   });
                 }, 2000);
@@ -165,12 +165,24 @@ class message extends Component {
           buttonPressed: 1,
         });
 
-        this.setState({
-          message: "Scanned " + this.state.referencePlate,
-          spinnerOn: 1,
-          buttonPressed: 1,
-        });
-        this.searchLicensePlate(this.state.referencePlate);
+        if (this.state.canScan) {
+          setTimeout(() => {
+            this.setState({
+              message: "Scanned " + this.state.referencePlate,
+              spinnerOn: 0,
+              buttonPressed: 1,
+            });
+          }, 2000);
+          this.searchLicensePlate(this.state.referencePlate);
+        } else {
+          setTimeout(() => {
+            this.setState({
+              message: "License plate could not be scanned.",
+              spinnerOn: 0,
+              buttonPressed: 1,
+            });
+          }, 2000);
+        }
 
         this.disableButton(2000);
 
@@ -541,17 +553,17 @@ class message extends Component {
 
   updateScanButton = () => {
     //Updates the "license plate can be scanned" button to be true or false
-    //  if (this.state.canScan == 0) {
-    //  this.setState({
-    //  canScan: 1,
-    //scanColor: "green",
-    //});
-    //} else if (this.state.canScan == 1) {
-    //this.setState({
-    //canScan: 0,
-    //scanColor: "red",
-    //});
-    //}
+    if (this.state.canScan == 0) {
+      this.setState({
+        canScan: 1,
+        scanColor: "green",
+      });
+    } else if (this.state.canScan == 1) {
+      this.setState({
+        canScan: 0,
+        scanColor: "red",
+      });
+    }
   };
 
   updateMemButton = () => {
@@ -766,26 +778,27 @@ class message extends Component {
               </button>
               <br></br>
 
-              {/*
-              <form>
-                <input
-                  type="text"
-                  name="topicBox"
-                  placeholder="Enter License Plate Number"
-                  value={this.state.referencePlate}
-                  onChange={this.handleChange.bind(this)}
-                />
-              </form>
-              */}
+              {
+                <form>
+                  <input
+                    type="text"
+                    name="topicBox"
+                    placeholder="Enter License Plate Number"
+                    value={this.state.referencePlate}
+                    disabled={this.state.buttonPressed}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </form>
+              }
               <div>
                 <button
                   type="button"
                   class="btn btn-circle btn-xl m-3 text-white"
-                  onClick={this.updateMemButton}
+                  onClick={this.updateScanButton}
                   disabled={this.state.buttonPressed}
-                  style={{ backgroundColor: this.state.memColor }}
+                  style={{ backgroundColor: this.state.scanColor }}
                 >
-                  Valid Reservation Number?
+                  License Plate can be Scanned?
                 </button>
 
                 <button
