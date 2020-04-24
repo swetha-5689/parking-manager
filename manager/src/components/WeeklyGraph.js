@@ -69,7 +69,7 @@ class ChartsPage extends React.Component {
   };
   componentDidMount() {
     axios
-      .get("http://localhost:4000/api/stats/")
+      .get("https://cryptic-depths-70075.herokuapp.com/api/stats/")
       .then((response) => {
         var statsData = { ...this.state.dataBar };
         statsData.datasets[0].data[0] = response.data[0].OverstayCount * 7;
