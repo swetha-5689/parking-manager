@@ -26,7 +26,7 @@ class message extends Component {
       spinnerOn: 0,
       canScan: 0, //CONNECT TO BACK END- LICENSE PLATE NUM
       scanColor: "red",
-      resFound: 0,
+      resFound: 0, //
       resColor: "red",
       hasMemNum: 0, //CONNECT TO BACK END - RETRIEVE MEM NUM
       validMemNum: 0, //CONNECT TO BACK END - CHECK MEM NUM
@@ -48,7 +48,7 @@ class message extends Component {
       licensePlate: "No License Plate Found",
       referencePlate: plateInput,
       resID: "No Reservation Found",
-      referenceResID: null,
+      referenceResID: "No ID Entered",
     };
   }
 
@@ -67,6 +67,7 @@ class message extends Component {
               this.setState({ canScan: 1 }, function () {
                 setTimeout(() => {
                   this.setState({
+                    message: "License plate successfully found.",
                     spinnerOn: 0,
                   });
                 }, 2000);
@@ -98,20 +99,28 @@ class message extends Component {
       });
   }
 
-  searchResID(input) {
+  searchResIDInput(input) {
+    //Used when customer manually enters reservation ID
+
     axios
-      .get("http://localhost:5000/api/customers/searchResID/" + input)
+      .get("http://localhost:5000/api/spots/searchResID/" + input)
       .then((response) => {
-        this.setState({
-          resID: response.data.resID,
-        });
+        this.setState(
+          {
+            resID: response.data.resID,
+          },
+          function () {
+            if (this.state.referenceResID === this.state.resID) {
+              this.setState({ resFound: 1, validMemNum: 1 });
+            }
+          }
+        );
       });
   }
 
-  searchResIDInput(input) {
-    //Used when customer manually enters reservation ID
+  searchResID(input) {
     axios
-      .get("http://localhost:5000/api/customers/searchResIDInput/" + input)
+      .get("http://localhost:5000/api/customers/searchResID/" + input)
       .then((response) => {
         this.setState({
           resID: response.data.resID,
@@ -155,24 +164,12 @@ class message extends Component {
           buttonPressed: 1,
         });
 
-        if (this.state.canScan) {
-          setTimeout(() => {
-            this.setState({
-              message: "Scanned " + this.state.referencePlate,
-              spinnerOn: 0,
-              buttonPressed: 1,
-            });
-          }, 2000);
-          this.searchLicensePlate(this.state.referencePlate);
-        } else {
-          setTimeout(() => {
-            this.setState({
-              message: "License Plate could not be scanned.",
-              spinnerOn: 0,
-              buttonPressed: 1,
-            });
-          }, 2000);
-        }
+        this.setState({
+          message: "Scanned " + this.state.referencePlate,
+          spinnerOn: 1,
+          buttonPressed: 1,
+        });
+        this.searchLicensePlate(this.state.referencePlate);
 
         this.disableButton(2000);
 
@@ -249,12 +246,15 @@ class message extends Component {
         } else if (this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
-              "Reservation number search complete. Please press the advance button.",
+              "Reservation number search complete. Please press the advance button." +
+              this.state.referenceResID,
             spinnerOn: 0,
             promptMemNum: 1,
           });
+
           memCheck = true;
           this.waitNumpad();
+          this.searchResIDInput(this.state.referenceResID);
         } else if (!this.state.hasMemNum && promptCheck) {
           this.setState({
             message:
@@ -348,12 +348,19 @@ class message extends Component {
           }, 2000);
           reset = 1;
         } else if (this.state.hasMemNum && promptCheck) {
-          this.setState({
-            message:
-              "Reservation number search complete. Please press the advance button.",
-            spinnerOn: 0,
-            promptMemNum: 1,
-          });
+          this.setState(
+            {
+              message:
+                "Reservation number search complete. Please press the advance button." +
+                this.state.referenceResID,
+              spinnerOn: 0,
+              promptMemNum: 1,
+            },
+            function () {
+              this.searchResIDInput(this.state.referenceResID);
+            }
+          );
+
           memCheck = true;
           this.waitNumpad();
         } else if (!this.state.hasMemNum && promptCheck) {
@@ -499,7 +506,7 @@ class message extends Component {
     }
   };
 
-  isValidMemNumber = () => {
+  isValidMemNumber(input) {
     //Checks to see if a valid reservation number exists.
     //if number successfully found in database, return 1
     //otherwise, return 0
@@ -508,7 +515,7 @@ class message extends Component {
     } else if (this.state.validMemNum == 0) {
       return false;
     }
-  };
+  }
 
   isGarageFull = () => {
     //Checks to see if the garage is full or not
@@ -536,32 +543,32 @@ class message extends Component {
 
   updateScanButton = () => {
     //Updates the "license plate can be scanned" button to be true or false
-    if (this.state.canScan == 0) {
-      this.setState({
-        canScan: 1,
-        scanColor: "green",
-      });
-    } else if (this.state.canScan == 1) {
-      this.setState({
-        canScan: 0,
-        scanColor: "red",
-      });
-    }
+    //  if (this.state.canScan == 0) {
+    //  this.setState({
+    //  canScan: 1,
+    //scanColor: "green",
+    //});
+    //} else if (this.state.canScan == 1) {
+    //this.setState({
+    //canScan: 0,
+    //scanColor: "red",
+    //});
+    //}
   };
 
   updateMemButton = () => {
     //Updates the "has a valid reservation number" button to be true or false
-    //if (this.state.validMemNum == 0) {
-    // this.setState({
-    //    validMemNum: 1,
-    //   memColor: "green",
-    // });
-    //  } else if (this.state.validMemNum == 1) {
-    //   this.setState({
-    //     validMemNum: 0,
-    //     memColor: "red",
-    //   });
-    //  }
+    if (this.state.validMemNum == 0) {
+      this.setState({
+        validMemNum: 1,
+        memColor: "green",
+      });
+    } else if (this.state.validMemNum == 1) {
+      this.setState({
+        validMemNum: 0,
+        memColor: "red",
+      });
+    }
   };
 
   updateGarageButton = () => {
@@ -757,26 +764,26 @@ class message extends Component {
               </button>
               <br></br>
 
-              {
-                <form>
-                  <input
-                    type="text"
-                    name="topicBox"
-                    placeholder="Enter License Plate Number"
-                    value={this.state.referencePlate}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </form>
-              }
+              {/*
+              <form>
+                <input
+                  type="text"
+                  name="topicBox"
+                  placeholder="Enter License Plate Number"
+                  value={this.state.referencePlate}
+                  onChange={this.handleChange.bind(this)}
+                />
+              </form>
+              */}
               <div>
                 <button
                   type="button"
                   class="btn btn-circle btn-xl m-3 text-white"
-                  onClick={this.updateScanButton}
+                  onClick={this.updateMemButton}
                   disabled={this.state.buttonPressed}
-                  style={{ backgroundColor: this.state.scanColor }}
+                  style={{ backgroundColor: this.state.memColor }}
                 >
-                  License Plate can be scanned?
+                  Valid Reservation Number?
                 </button>
 
                 <button
