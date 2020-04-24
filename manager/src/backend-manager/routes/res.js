@@ -41,21 +41,37 @@ var newReservation3 = Res({
   reserveTime: new Date(2020, 2, 17, 12, 00)
 });
 router.use(cors());
-
+function dateSetter (d1, d2, d3) {
+  var startTime = new Date();
+  var endTime = new Date();
+  startTime = d1;
+  endTime = d1;
+  startTime.setHours(d2.getHours());
+  return ([startTime, endTime]);
+}
 router.post("/", (req, response) => {
-  console.log(req.body.queryResult.outputContexts[0].parameters.timePeriod.startTime);
-  //console.log(req.body.queryResult.outputContexts);
+  var name = req.body.queryResult.parameters.name.name;
+  var name = name.split(" ");
+  console.log(name[0]);
+  var d1 = new Date(req.body.queryResult.parameters.date);
+  var d2 = new Date(req.body.queryResult.parameters.timePeriod.startTime);
+  var d3 = new Date(req.body.queryResult.parameters.timePeriod.endTime);
+  d2.setDate(d1.getDate());
+  d3.setDate(d1.getDate());
+  const min = 100000;
+  const max = 1000000;
+  var rand = min + Math.random() * (max - min);
+  var resID1 = Math.floor(rand);
   const newRes = Res({
-    custFName: "Neha",
-    custLName: "Nelson",
-    type: "Guaranteed",
-    car: "E82RTY",
-    email: "neha@example.com",
-    resID: 129676,
+    custFName: name[0],
+    custLName: name[1],
+    type: "Confirmed",
+    car: req.body.queryResult.parameters.licensePlate,
+    email: req.body.queryResult.parameters.email,
+    resID: resID1,
     Paid: false,
-    startTime: req.body.queryResult.outputContexts[0].parameters.timePeriod.startTime,
-    reserveTime: req.body.queryResult.outputContexts[0].parameters.timePeriod.endTime,
-    endTime: new Date(2020, 2, 27, 12, 00)
+    startTime: d2,
+    reserveTime: d3
   });
   newRes
     .save()
