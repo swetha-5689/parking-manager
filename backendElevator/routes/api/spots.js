@@ -22,6 +22,8 @@ router.post("/addSpot", (req, res) => {
     isVacant: Boolean(req.body.isVacant),
     isReserved: Boolean(req.body.isReserved),
     isPremium: Boolean(req.body.isPremium),
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
   });
 
   newSpot

@@ -27,6 +27,15 @@ const SpotSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  startTime: {
+    type: String,
+    default: 0,
+  },
+
+  endTime: {
+    type: String,
+    default: 0,
+  },
 });
 
 module.exports = Spot = mongoose.model("spot", SpotSchema);

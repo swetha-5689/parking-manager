@@ -1,4 +1,5 @@
 var plateList = [
+  /*
   "SDK-111",
   "UFO-212",
   "KDV-883",
@@ -7,6 +8,8 @@ var plateList = [
   "UER-017",
   "TTL-332",
   "ECE-666",
+  */
+  "E85DBY",
 ];
 
 export default plateList;

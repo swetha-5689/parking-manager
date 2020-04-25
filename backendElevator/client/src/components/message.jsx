@@ -44,8 +44,8 @@ class message extends Component {
       displayQRCode: 0,
       promptMemNum: 0,
       spotNum: "None", //CONNECT TO BACK END- SPOT NUMBER
-      resStart: 0, //CONNECT TO BACK END- RESERVATION START TIME
-      resEnd: 0, //CONNECT TO BACK END- RESERVATION END TIME
+      resStart: "", //CONNECT TO BACK END- RESERVATION START TIME
+      resEnd: "", //CONNECT TO BACK END- RESERVATION END TIME
       licensePlate: "No License Plate Found",
       referencePlate: plateInput,
       resID: "No Reservation Found",
@@ -135,6 +135,8 @@ class message extends Component {
       .then((response) => {
         this.setState({
           spotNum: response.data.spotNumber,
+          resStart: response.data.startTime,
+          resEnd: response.data.endTime,
         });
       });
   }
@@ -720,7 +722,8 @@ class message extends Component {
                         className="h1 text-black text-center"
                         style={{ fontSize: 100 }}
                       >
-                        {this.state.spotNum}
+                        {this.state.spotNum} from {this.state.resStart} to{" "}
+                        {this.state.resEnd}
                       </div>
                     ) : null}
                   </div>
