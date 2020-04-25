@@ -9,6 +9,7 @@ var plateList = [
   "TTL-332",
   "ECE-666",
   */
+  "SDK111",
   "E85DBY",
 ];
 
