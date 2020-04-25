@@ -25,27 +25,26 @@ class message extends Component {
     this.state = {
       message: "Welcome to SmartPark. Please approach the elevator terminal.",
       spinnerOn: 0,
-      canScan: 0, //CONNECT TO BACK END- LICENSE PLATE NUM
+      canScan: 0,
       scanColor: "red",
-      resFound: 0, //
+      resFound: 0,
       resColor: "red",
-      hasMemNum: 0, //CONNECT TO BACK END - RETRIEVE MEM NUM
-      validMemNum: 0, //CONNECT TO BACK END - CHECK MEM NUM
+      hasMemNum: 0,
+      validMemNum: 0,
       memColor: "red",
       buttonPressed: 0,
       promptUser: 0,
       memRead: 0,
       nextScreen: 1,
       buttonDisabled: 0,
-      garageFull: 0, //CONNECT TO BACK END - CHECK ALL SPOTS
+      garageFull: 0,
       garageColor: "red",
       advanceColor: "white",
-      displaySpotNum: 0, //CONNECT TO BACK END - SPOT NUMBER WAS FOUND (TRUE/FALSE)
+      displaySpotNum: 0,
       displayQRCode: 0,
       promptMemNum: 0,
-      spotNum: "None", //CONNECT TO BACK END- SPOT NUMBER
-      resStart: "", //CONNECT TO BACK END- RESERVATION START TIME
-      resEnd: "", //CONNECT TO BACK END- RESERVATION END TIME
+      spotNum: "None",
+      resStart: "",
       licensePlate: "No License Plate Found",
       referencePlate: plateInput,
       resID: "No Reservation Found",
@@ -53,6 +52,7 @@ class message extends Component {
     };
   }
 
+  //Search for a license plate number in the back end
   searchLicensePlate(scannedPlate) {
     axios
       .get("http://localhost:5000/api/customers/searchPlate/" + scannedPlate)
@@ -92,12 +92,12 @@ class message extends Component {
             if (this.state.resID != "No Reservation Found") {
               this.setState({ resFound: 1 });
             }
-            //this.getReservedSpot(this.state.resID);
           }
         );
       });
   }
 
+  //Check for a reservation
   searchResIDInput(input) {
     //Used when customer manually enters reservation ID
 
@@ -118,6 +118,7 @@ class message extends Component {
       });
   }
 
+  //Search for reservation when the plate was successfully scanned
   searchResID(input) {
     axios
       .get("http://localhost:5000/api/customers/searchResID/" + input)
@@ -140,10 +141,12 @@ class message extends Component {
       });
   }
 
+  //Update resID state
   handleChange(event) {
     this.setState({ referenceResID: event.target.value });
   }
 
+  //Set reference plate number
   handleChangePlate(event) {
     this.setState({ referencePlate: event.target.value });
   }
@@ -162,19 +165,20 @@ class message extends Component {
         resID: "No Reservation Found",
         spotNum: "None",
         resFound: 0,
+        validMemNum: 0,
       });
       reset = 0;
       inputMemNum = -1;
     } else {
       if (this.state.nextScreen == 1) {
-        this.searchLicensePlate(this.state.referencePlate);
         this.setState({
           message: "Scanning license plate...",
           spinnerOn: 1,
           buttonPressed: 1,
         });
 
-        if (this.wasScanned) {
+        if (this.wasScanned()) {
+          this.searchLicensePlate(this.state.referencePlate);
           setTimeout(() => {
             this.setState({
               message: "Scanned " + this.state.referencePlate,
@@ -185,8 +189,7 @@ class message extends Component {
         } else {
           setTimeout(() => {
             this.setState({
-              message:
-                "License plate could not be scanned." + this.state.licensePlate,
+              message: "License plate could not be scanned.",
               spinnerOn: 0,
               buttonPressed: 1,
             });
@@ -646,10 +649,7 @@ class message extends Component {
       this.state.spotNum +
       "\n" +
       "Reservation Start Time: " +
-      this.state.resStart +
-      "\n" +
-      "Reservation End Time: " +
-      this.state.resEnd
+      this.state.resStart
     );
   };
 
@@ -679,7 +679,6 @@ class message extends Component {
                   </div>
                   <div>
                     <NumPad.Number
-                      //onChange={this.handleChange.bind(this)}
                       onChange={(value) => {
                         this.setState({ referenceResID: value });
                       }}
@@ -687,16 +686,6 @@ class message extends Component {
                       negative={false}
                       decimal={false}
                     />
-                    {/*
-                    <form onSubmit={this.onSubmit}>
-                      <label>Reservation ID </label>
-                      <input
-                        type="text"
-                        name="resID"
-                        ref={(input) => (this.input = input)}
-                      />
-                    </form>
-                  */}
                   </div>
                 </div>
               ) : (
@@ -721,7 +710,7 @@ class message extends Component {
                         className="h1 text-black text-center"
                         style={{ fontSize: 100 }}
                       >
-                        {this.state.spotNum} at {this.state.resStart}
+                        {this.state.spotNum}
                       </div>
                     ) : null}
                   </div>
@@ -747,8 +736,7 @@ class message extends Component {
                 <h1
                   style={{ marginTop: "5%", marginBottom: "12%", fontSize: 75 }}
                 >
-                  Your plate was not found in the system. Do you have a
-                  reservation number?
+                  Do you have a reservation number?
                 </h1>
                 <button
                   class="m-5 button bigButton"
