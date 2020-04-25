@@ -166,13 +166,14 @@ class message extends Component {
       inputMemNum = -1;
     } else {
       if (this.state.nextScreen == 1) {
+        this.searchLicensePlate(this.state.referencePlate);
         this.setState({
           message: "Scanning license plate...",
           spinnerOn: 1,
           buttonPressed: 1,
         });
 
-        if (this.state.canScan) {
+        if (this.wasScanned) {
           setTimeout(() => {
             this.setState({
               message: "Scanned " + this.state.referencePlate,
@@ -180,11 +181,11 @@ class message extends Component {
               buttonPressed: 1,
             });
           }, 2000);
-          this.searchLicensePlate(this.state.referencePlate);
         } else {
           setTimeout(() => {
             this.setState({
-              message: "License plate could not be scanned.",
+              message:
+                "License plate could not be scanned." + this.state.licensePlate,
               spinnerOn: 0,
               buttonPressed: 1,
             });
@@ -745,7 +746,8 @@ class message extends Component {
                 <h1
                   style={{ marginTop: "5%", marginBottom: "12%", fontSize: 75 }}
                 >
-                  Do you have a reservation number?
+                  Your plate was not found in the system. Do you have a
+                  reservation number?
                 </h1>
                 <button
                   class="m-5 button bigButton"
