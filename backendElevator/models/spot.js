@@ -31,11 +31,6 @@ const SpotSchema = new Schema({
     type: String,
     default: 0,
   },
-
-  endTime: {
-    type: String,
-    default: 0,
-  },
 });
 
 module.exports = Spot = mongoose.model("spot", SpotSchema);

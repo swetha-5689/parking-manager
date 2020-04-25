@@ -136,7 +136,6 @@ class message extends Component {
         this.setState({
           spotNum: response.data.spotNumber,
           resStart: response.data.startTime,
-          resEnd: response.data.endTime,
         });
       });
   }
@@ -722,8 +721,7 @@ class message extends Component {
                         className="h1 text-black text-center"
                         style={{ fontSize: 100 }}
                       >
-                        {this.state.spotNum} from {this.state.resStart} to{" "}
-                        {this.state.resEnd}
+                        {this.state.spotNum} at {this.state.resStart}
                       </div>
                     ) : null}
                   </div>
