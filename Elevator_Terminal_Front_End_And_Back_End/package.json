@@ -1,7 +1,7 @@
 {
-  "name": "backendelevator",
+  "name": "elevator_terminal_front_end_and_back_end",
   "version": "1.0.0",
-  "description": "Database for elevator sub-group.",
+  "description": "Elevator terminal with front end and back end integrated",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -13,6 +13,9 @@
   "author": "Tom Murphy",
   "license": "MIT",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.3",
+    "@testing-library/user-event": "^10.1.0",
     "Math": "0.0.1-security",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
